@@ -1,0 +1,46 @@
+{
+  "name": "Sumureza General Supplies",
+  "short_name": "Sumureza",
+  "description": "Business accounting and management suite",
+  "start_url": "/sumureza/",
+  "scope": "/sumureza/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d1720",
+  "theme_color": "#c8962a",
+  "categories": ["business", "finance", "productivity"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Invoice",
+      "short_name": "Invoice",
+      "url": "/sumureza/?action=new_invoice",
+      "description": "Create a new invoice"
+    },
+    {
+      "name": "New Quotation",
+      "short_name": "Quote",
+      "url": "/sumureza/?action=new_quote",
+      "description": "Create a new quotation"
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "url": "/sumureza/",
+      "description": "View business dashboard"
+    }
+  ]
+}
