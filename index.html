@@ -525,21 +525,7 @@ function updateDriveUI(){
   else{dot.className='dot warn';lbl.textContent='Connecting to Firestore...';}
 }
 
-function initFirestore(){
-  // Load Firebase SDK dynamically
-  const s=document.createElement('script');
-  s.type='module';
-  s.textContent=`
-    import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-    import{getFirestore,collection,doc,getDocs,setDoc,deleteDoc,getDoc}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-    const app=initializeApp(${JSON.stringify(FBCONFIG)});
-    window._fs=getFirestore(app);
-    window._fsFns={collection,doc,getDocs,setDoc,deleteDoc,getDoc};
-    window.dispatchEvent(new Event('fsReady'));
-  `;
-  // Can't use inline module — use CDN script approach instead
-  document.head.appendChild(s);
-}
+// initFirestore() removed — using Firebase compat SDK loaded below instead
 
 async function fsInit(){
   return new Promise((resolve)=>{
@@ -1105,7 +1091,7 @@ function openDocForm(type,id){
       </div>
     </div>`:'';
   $('fmbody').innerHTML=`
-    ${isDel&&!ex?'${orderSourceHTML}':''}
+    ${isDel&&!ex?orderSourceHTML:''}
     <div class="fg2" style="margin-bottom:16px">
       <div class="fg"><label class="fl">Reference No.</label><input class="fi" id="f-ref" value="${esc(ref)}"></div>
       <div class="fg"><label class="fl">Date</label><input type="date" class="fi" id="f-date" value="${ex?.date||today()}"></div>
@@ -1454,20 +1440,45 @@ function exportPDF(){
   const btn=$('dpdfbtn');
   btn.innerHTML='⏳ Generating...';btn.disabled=true;
   const safeName=docName.replace(/[^a-zA-Z0-9\s\-]/g,'').trim()||'document';
-  const full=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${safeName}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>body{margin:0;padding:20px;}*{box-sizing:border-box;}${getDocCSS()}</style>
-    </head><body>${docHTML}
-    <script>window.onload=function(){window.print();};<\/script>
-    </body></html>`;
-  const blob=new Blob([full],{type:'text/html'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=safeName+'.html';
-  a.click();
-  URL.revokeObjectURL(url);
-  setTimeout(()=>{btn.innerHTML='⬇️ Export PDF';btn.disabled=false;},1500);
-  toast(`📄 Downloaded! Open the file → it will auto-print → choose "Save as PDF"`);
+
+  function doExport(){
+    const el=document.createElement('div');
+    el.innerHTML=docHTML;
+    el.style.position='absolute';el.style.left='-9999px';el.style.top='0';
+    document.body.appendChild(el);
+    const opt={
+      margin:[8,8,8,8],
+      filename:safeName+'.pdf',
+      image:{type:'jpeg',quality:0.97},
+      html2canvas:{scale:2,useCORS:true,logging:false},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['avoid-all','css','legacy']}
+    };
+    html2pdf().set(opt).from(el).save().then(()=>{
+      document.body.removeChild(el);
+      btn.innerHTML='⬇️ Export PDF';btn.disabled=false;
+      toast('✅ PDF downloaded successfully!');
+    }).catch(err=>{
+      document.body.removeChild(el);
+      btn.innerHTML='⬇️ Export PDF';btn.disabled=false;
+      toast('❌ PDF export failed — try Print instead','err');
+      console.error('PDF error:',err);
+    });
+  }
+
+  // Load html2pdf.js if not already loaded
+  if(window.html2pdf){
+    doExport();
+  } else {
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    s.onload=doExport;
+    s.onerror=()=>{
+      btn.innerHTML='⬇️ Export PDF';btn.disabled=false;
+      toast('❌ Could not load PDF library. Check your internet connection.','err');
+    };
+    document.head.appendChild(s);
+  }
 }
 
 function quickEditDoc(){
@@ -2421,8 +2432,7 @@ initPinScreen();
   // Load Firebase app + firestore compat SDKs
   function loadScript(src,cb){const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);}
   loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js',()=>{
-    loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js',async ()=>{
-      firebase.initializeApp({
+    loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js',async ()=>{      firebase.initializeApp({
         apiKey:"AIzaSyB7bjo_EcCruDG91JOiwqU4rHLO-qnNNJI",
         authDomain:"sumureza-2659c.firebaseapp.com",
         projectId:"sumureza-2659c",
@@ -2434,7 +2444,10 @@ initPinScreen();
       fsReady=true;
       updateDriveUI();
       // Now load fresh data from Firestore (overrides localStorage cache)
-      await loadAll();
+      await loadAll().catch(err=>{
+        console.warn('loadAll error:',err);
+        toast('⚠️ Firestore load error — showing cached data','warn');
+      });
       // Re-init pin screen in case users weren't in localStorage yet
       if($('pinScreen')&&$('pinScreen').style.display!=='none'){
         loadUsers();
