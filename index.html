@@ -2374,12 +2374,16 @@ async function tryLoadUsersFromFirestore(){
     if(snap.exists&&snap.data()&&snap.data().data){
       const fsUsers=JSON.parse(snap.data().data);
       if(Array.isArray(fsUsers)&&fsUsers.length>0){
-        // Only use Firestore users if they have real passwords set
+        // ONLY load if users have real password-based auth — ignore old PIN users
         const hasRealPasswords=fsUsers.some(u=>u.password&&!u.mustChangePassword);
         if(hasRealPasswords){
           USERS=fsUsers;
           localStorage.setItem('sgd_users',JSON.stringify(USERS));
-          console.log('[Auth] Loaded',USERS.length,'user(s) from Firestore');
+          console.log('[Auth] Loaded',USERS.length,'real user(s) from Firestore');
+        } else {
+          // Old PIN-only users in Firestore — ignore them completely
+          console.log('[Auth] Firestore has old PIN users only — ignoring, showing setup');
+          USERS=[];
         }
       }
     }
@@ -2389,28 +2393,29 @@ async function tryLoadUsersFromFirestore(){
 // ── LOGIN FLOW ──────────────────────────────────────────────────
 function initPinScreen(){
   loadUsers();
-  // Clear any old PIN-only users (from previous auth system)
-  // Old users have a 'pin' field but no 'password' field
+  // Strip any old PIN-only users — they can't log in with the new system
   const hasOldPinUsers = USERS.length > 0 && USERS.every(u => u.pin && !u.password);
   if(hasOldPinUsers){
-    console.log('[Auth] Old PIN users found — clearing for new auth system');
+    console.log('[Auth] Clearing old PIN users');
     USERS = [];
     localStorage.removeItem('sgd_users');
   }
-  // Check if any real password-based users exist
+  // Show correct screen immediately — don't wait for Firestore
   const hasRealUsers = USERS.some(u => u.password && !u.mustChangePassword);
-  if(!hasRealUsers){
-    showFirstRunSetup();
-  } else {
+  if(hasRealUsers){
     showLoginScreen();
+  } else {
+    showFirstRunSetup();
   }
-  // Load real users from Firestore in background
+  // Then check Firestore in background — only switch to login if real users found
   tryLoadUsersFromFirestore().then(()=>{
-    const stillNoRealUsers = !USERS.some(u => u.password && !u.mustChangePassword);
-    if(stillNoRealUsers && $('pinScreen') && $('pinScreen').style.display !== 'none'){
-      showFirstRunSetup();
-    } else if(!stillNoRealUsers && !document.getElementById('loginUsername')){
+    const nowHasRealUsers = USERS.some(u => u.password && !u.mustChangePassword);
+    const pinScreenVisible = $('pinScreen') && $('pinScreen').style.display !== 'none';
+    if(!pinScreenVisible) return; // Already logged in
+    if(nowHasRealUsers){
       showLoginScreen();
+    } else {
+      showFirstRunSetup();
     }
   });
 }
