@@ -2389,22 +2389,27 @@ async function tryLoadUsersFromFirestore(){
 // ── LOGIN FLOW ──────────────────────────────────────────────────
 function initPinScreen(){
   loadUsers();
-  // Check if this is a first-run (no user has a real password set yet)
+  // Clear any old PIN-only users (from previous auth system)
+  // Old users have a 'pin' field but no 'password' field
+  const hasOldPinUsers = USERS.length > 0 && USERS.every(u => u.pin && !u.password);
+  if(hasOldPinUsers){
+    console.log('[Auth] Old PIN users found — clearing for new auth system');
+    USERS = [];
+    localStorage.removeItem('sgd_users');
+  }
+  // Check if any real password-based users exist
   const hasRealUsers = USERS.some(u => u.password && !u.mustChangePassword);
   if(!hasRealUsers){
-    // First run — show account setup screen
     showFirstRunSetup();
   } else {
     showLoginScreen();
   }
-  // Always try to load real users from Firestore in background
+  // Load real users from Firestore in background
   tryLoadUsersFromFirestore().then(()=>{
-    // After loading from Firestore, re-check if we should show login or setup
     const stillNoRealUsers = !USERS.some(u => u.password && !u.mustChangePassword);
     if(stillNoRealUsers && $('pinScreen') && $('pinScreen').style.display !== 'none'){
       showFirstRunSetup();
-    } else if(!stillNoRealUsers && document.getElementById('firstRunScreen')){
-      // Real users found — switch to login
+    } else if(!stillNoRealUsers && !document.getElementById('loginUsername')){
       showLoginScreen();
     }
   });
@@ -2523,6 +2528,11 @@ function showLoginScreen(){
       </div>
       <div id="loginLoading" style="display:none;text-align:center;color:rgba(255,255,255,.4);font-size:12px;margin-top:12px;font-family:'DM Sans',sans-serif;">
         <span style="animation:spin 1s linear infinite;display:inline-block;margin-right:6px">⟳</span> Connecting to server...
+      </div>
+      <div style="text-align:center;margin-top:18px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px;">
+        <button onclick="showFirstRunSetup()" style="background:none;border:none;color:rgba(200,150,42,.6);font-size:11.5px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;">
+          No account yet? Create admin account
+        </button>
       </div>`;
   }
   if($('loginUsername')) $('loginUsername').value='';
