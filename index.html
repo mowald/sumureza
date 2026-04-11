@@ -248,8 +248,7 @@ input[type=checkbox]{accent-color:var(--gold);}
 @media(max-width:768px){
   body{flex-direction:column!important;overflow:hidden!important;height:100vh!important;height:100dvh!important;}
   .sb{display:none!important;width:0!important;min-width:0!important;overflow:hidden!important;}
-  .mob-header{display:flex!important;}
-  .mob-nav{display:flex!important;}
+  .mob-header{display:flex!important;}.mob-nav{display:flex!important;}
   .main{flex:1!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;min-height:0!important;}
   .topbar{padding:8px 14px!important;flex-shrink:0!important;}
   .ptitle{font-size:14px!important;}.psub{display:none!important;}
@@ -262,7 +261,7 @@ input[type=checkbox]{accent-color:var(--gold);}
   .fg2,.fg3,.fg4{grid-template-columns:1fr 1fr!important;}
   .s2,.s3,.s4{grid-column:span 2!important;}
   .card{margin-bottom:10px!important;}
-  .tbl{font-size:11px!important;display:block!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  .tbl{font-size:11px!important;display:block!important;overflow-x:auto!important;}
   .tbl thead th{padding:6px 8px!important;font-size:9px!important;white-space:nowrap!important;}
   .tbl td{padding:6px 8px!important;white-space:nowrap!important;}
   .btn{font-size:11px!important;padding:6px 10px!important;}
@@ -271,8 +270,7 @@ input[type=checkbox]{accent-color:var(--gold);}
   .mbg{padding:8px!important;}
   .mbox{margin:0!important;border-radius:10px!important;width:100%!important;max-width:unset!important;}
   .mbody{padding:14px!important;}.mfoot{padding:10px 14px!important;}
-  .pin-box{width:92vw!important;max-width:340px!important;padding:28px 16px!important;}
-  .pin-btn{padding:14px!important;font-size:18px!important;}
+  .login-box{padding:28px 20px!important;margin:12px!important;}
   .twrap{padding:8px 10px!important;}.tbox{min-width:unset!important;width:100%!important;}
   .docpaper{padding:18px 14px!important;}
   .dh{flex-direction:column!important;gap:10px!important;}
@@ -294,17 +292,15 @@ input[type=checkbox]{accent-color:var(--gold);}
 .mob-header{
   display:none;
   background:linear-gradient(90deg,#0d1720,#152030);
-  padding:11px 16px;
+  padding:10px 16px;
   align-items:center;
   justify-content:space-between;
   flex-shrink:0;
-  border-bottom:1px solid rgba(200,150,42,.22);
-  min-height:52px;
+  border-bottom:1px solid rgba(200,150,42,.18);
 }
-.mob-logo{font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:#fff;line-height:1.2;}
-.mob-logo span{color:var(--gold);font-size:8.5px;display:block;letter-spacing:2px;font-family:'DM Sans',sans-serif;font-weight:700;margin-top:2px;}
-.mob-menu-btn{background:rgba(200,150,42,.12);border:1px solid rgba(200,150,42,.4);color:var(--gold-light);font-size:12px;padding:8px 14px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;-webkit-tap-highlight-color:transparent;white-space:nowrap;}
-.mob-menu-btn:active{background:rgba(200,150,42,.25);}
+.mob-logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:#fff;}
+.mob-logo span{color:var(--gold);font-size:9px;display:block;letter-spacing:1.5px;font-family:'DM Sans',sans-serif;font-weight:600;margin-top:1px;}
+.mob-menu-btn{background:none;border:1px solid rgba(200,150,42,.35);color:var(--gold-light);font-size:13px;padding:6px 12px;border-radius:5px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 
 /* Mobile nav drawer */
 .mob-drawer{
@@ -337,82 +333,129 @@ input[type=checkbox]{accent-color:var(--gold);}
 .mob-nav{
   display:none;
   position:fixed;bottom:0;left:0;right:0;
-  background:linear-gradient(180deg,#0e1a27,#0a1420);
-  border-top:1px solid rgba(200,150,42,.25);
-  z-index:300;
+  background:#0d1720;
+  border-top:1px solid rgba(200,150,42,.2);
+  z-index:200;
   justify-content:space-around;
-  align-items:stretch;
-  padding:4px 0 env(safe-area-inset-bottom,8px);
-  box-shadow:0 -4px 20px rgba(0,0,0,.45);
+  padding:6px 0 env(safe-area-inset-bottom,6px);
 }
 .mob-nav-item{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-  padding:6px 4px 4px;cursor:pointer;color:rgba(255,255,255,.35);
-  font-size:9px;font-weight:600;min-width:52px;flex:1;
-  -webkit-tap-highlight-color:transparent;position:relative;transition:color .15s;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:4px 8px;cursor:pointer;color:rgba(255,255,255,.38);
+  font-size:9px;font-weight:600;letter-spacing:.3px;min-width:52px;
 }
-.mob-nav-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);border-radius:0 0 3px 3px;transition:width .2s;}
 .mob-nav-item.active{color:var(--gold);}
-.mob-nav-item.active::before{width:28px;}
-.mob-nav-item:active{color:var(--gold-light);}
-.mob-nav-item .mni-ico{font-size:22px;line-height:1;}
+.mob-nav-item .mni-ico{font-size:20px;}
 
 /* PIN AUTH */
 .pin-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0d1720 0%,#152030 60%,#1a2a40 100%);z-index:9999;display:flex;align-items:center;justify-content:center;}
-.pin-box{background:rgba(255,255,255,.04);border:1px solid rgba(200,150,42,.2);border-radius:16px;padding:40px 36px;width:340px;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.4);}
-.pin-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:4px;}
-.pin-tag{font-size:10px;color:rgba(200,150,42,.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;}
-.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:24px;}
-.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(200,150,42,.4);background:transparent;transition:all .2s;}
-.pin-dot.filled{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(200,150,42,.4);}
-.pin-dot.error{background:#8b2020;border-color:#8b2020;animation:shake .3s ease;}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-.pin-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-family:'DM Sans',sans-serif;font-size:20px;font-weight:600;padding:16px;cursor:pointer;transition:all .15s;user-select:none;}
-.pin-btn:hover{background:rgba(200,150,42,.18);border-color:rgba(200,150,42,.4);}
-.pin-btn:active{transform:scale(.94);background:rgba(200,150,42,.3);}
-.pin-btn.del{font-size:13px;color:rgba(255,255,255,.5);}
-.pin-btn.del:hover{color:#fff;}
+/* Legacy PIN styles kept minimal for any remaining references */
+.pin-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#fff;line-height:1.2;}
 .pin-err{color:#e07070;font-size:12px;min-height:18px;margin-top:6px;font-weight:600;}
-.pin-user-sel{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
-.pin-user-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;padding:11px 16px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px;transition:all .15s;}
-.pin-user-btn:hover{background:rgba(200,150,42,.15);border-color:rgba(200,150,42,.35);}
-.pin-user-role{font-size:10px;color:rgba(200,150,42,.7);text-transform:uppercase;letter-spacing:1px;margin-top:1px;}
-.pin-who{font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:18px;line-height:1.5;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ── Login box ── */
+.login-box{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(200,150,42,.2);
+  border-radius:16px;
+  padding:40px 36px;
+  width:100%;
+  max-width:380px;
+  box-shadow:0 24px 64px rgba(0,0,0,.5);
+  margin:16px;
+}
+.login-logo{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.login-logo-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold),#b8841e);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#0d1720;
+  flex-shrink:0;
+}
+.login-subtitle{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:28px;margin-top:4px;font-family:'DM Sans',sans-serif;letter-spacing:.3px;}
+.login-form{display:flex;flex-direction:column;gap:16px;}
+.login-field{display:flex;flex-direction:column;gap:6px;}
+.login-label{font-size:10.5px;font-weight:700;color:rgba(200,150,42,.8);letter-spacing:.8px;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
+.login-input{
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  padding:12px 14px;
+  outline:none;
+  transition:border-color .2s,background .2s;
+  width:100%;
+}
+.login-input:focus{border-color:var(--gold);background:rgba(255,255,255,.09);}
+.login-input::placeholder{color:rgba(255,255,255,.2);}
+.login-err{
+  color:#e07070;font-size:12px;font-weight:600;min-height:16px;
+  text-align:center;font-family:'DM Sans',sans-serif;
+  animation:shake .3s ease;
+}
+.login-btn{
+  background:var(--gold);
+  color:#0d1720;
+  border:none;
+  border-radius:8px;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  padding:13px;
+  cursor:pointer;
+  transition:all .18s;
+  margin-top:4px;
+  letter-spacing:.3px;
+}
+.login-btn:hover{background:#b8841e;transform:translateY(-1px);}
+.login-btn:active{transform:translateY(0);background:#a07018;}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
 </style>
 </head>
 <body>
 
-<!-- PIN LOCK SCREEN -->
+<!-- LOGIN SCREEN -->
 <div class="pin-screen" id="pinScreen">
-  <div class="pin-box">
-    <div class="pin-logo">SUMUREZA<br>GENERAL SUPPLIES</div>
-    <div class="pin-tag">Secure Access</div>
-    <div id="pinUserSel">
-      <div class="pin-who">Select your name to sign in</div>
-      <div class="pin-user-sel" id="pinUserList">
-        <div style="color:rgba(255,255,255,.3);font-size:12px;text-align:center;padding:12px">Loading users...</div>
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-icon">S</div>
+      <div>
+        <div class="pin-logo">SUMUREZA</div>
+        <div style="font-size:9px;color:rgba(200,150,42,.6);letter-spacing:2px;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:700">General Supplies</div>
       </div>
     </div>
-    <div id="pinEntry" style="display:none">
-      <div class="pin-who" id="pinWhoLbl">Enter your PIN</div>
-      <div class="pin-dots" id="pinDots"></div>
-      <div class="pin-grid">
-        <button class="pin-btn" onclick="pinPress('1')">1</button>
-        <button class="pin-btn" onclick="pinPress('2')">2</button>
-        <button class="pin-btn" onclick="pinPress('3')">3</button>
-        <button class="pin-btn" onclick="pinPress('4')">4</button>
-        <button class="pin-btn" onclick="pinPress('5')">5</button>
-        <button class="pin-btn" onclick="pinPress('6')">6</button>
-        <button class="pin-btn" onclick="pinPress('7')">7</button>
-        <button class="pin-btn" onclick="pinPress('8')">8</button>
-        <button class="pin-btn" onclick="pinPress('9')">9</button>
-        <button class="pin-btn del" onclick="pinBack()">⌫ Del</button>
-        <button class="pin-btn" onclick="pinPress('0')">0</button>
-        <button class="pin-btn del" onclick="pinClear()">✕</button>
+    <div class="login-subtitle" id="loginSubtitle">Sign in to your account</div>
+
+    <div class="login-form">
+      <div class="login-field">
+        <label class="login-label">Username</label>
+        <input class="login-input" id="loginUsername" type="text"
+          placeholder="Enter your username"
+          autocomplete="username"
+          onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
       </div>
-      <div class="pin-err" id="pinErr"></div>
-      <div style="margin-top:14px"><button onclick="showUserSel()" style="background:none;border:none;color:rgba(255,255,255,.28);font-size:11.5px;cursor:pointer;font-family:'DM Sans',sans-serif;">← Change user</button></div>
+      <div class="login-field">
+        <label class="login-label">Password</label>
+        <div style="position:relative">
+          <input class="login-input" id="loginPassword" type="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            onkeydown="if(event.key==='Enter')attemptLogin()">
+          <button onclick="toggleLoginPwd()" id="loginPwdToggle"
+            style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:16px;padding:4px;">👁</button>
+        </div>
+      </div>
+      <div class="login-err" id="loginErr"></div>
+      <button class="login-btn" onclick="attemptLogin()" id="loginSubmitBtn">
+        Sign In →
+      </button>
+    </div>
+
+    <div id="loginLoading" style="display:none;text-align:center;color:rgba(255,255,255,.4);font-size:12px;margin-top:12px;font-family:'DM Sans',sans-serif;">
+      <span style="animation:spin 1s linear infinite;display:inline-block;margin-right:6px">⟳</span> Connecting to server...
     </div>
   </div>
 </div>
@@ -457,7 +500,7 @@ input[type=checkbox]{accent-color:var(--gold);}
     <div class="ni" onclick="mobNav('settings')"><span class="ni-ico">⚙️</span>Company Settings</div>
     <div class="ni" onclick="mobNav('firestore')"><span class="ni-ico">🔥</span>Firestore DB</div>
     <div style="margin:16px 8px 8px;padding-top:14px;border-top:1px solid rgba(200,150,42,.12)">
-      <button onclick="closeMobDrawer();lockApp()" style="width:100%;padding:11px;background:rgba(139,32,32,.18);border:1px solid rgba(139,32,32,.35);border-radius:5px;color:#e07070;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">🔒 Lock App</button>
+      <button onclick="closeMobDrawer();lockApp()" style="width:100%;padding:11px;background:rgba(139,32,32,.18);border:1px solid rgba(139,32,32,.35);border-radius:5px;color:#e07070;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;">🔒 Lock App</button>
     </div>
   </div>
 </div>
@@ -505,7 +548,7 @@ input[type=checkbox]{accent-color:var(--gold);}
   <div class="nav-sec">Settings</div>
   <div class="ni" onclick="nav('settings')"><span class="ni-ico">⚙️</span>Company Settings</div>
   <div class="ni" onclick="nav('firestore')"><span class="ni-ico">🔥</span>Firestore DB</div>
-  <div class="ni" onclick="nav('pin_management')" id="ni-pin" style="display:none"><span class="ni-ico">🔐</span>PIN Management</div>
+  <div class="ni" onclick="nav('pin_management')" id="ni-pin" style="display:none"><span class="ni-ico">👥</span>User Management</div>
   <div class="drive-w">
     <div class="drive-row"><span class="dot off" id="ddot"></span><span id="dlbl">Connecting...</span></div>
   </div>
@@ -584,7 +627,7 @@ const FBCONFIG={
   messagingSenderId:"105210091754",
   appId:"1:105210091754:web:bf578781a6e9a844c21f93"
 };
-// DRIVE stub — Google Drive removed, using Firestore instead
+// DRIVE stub — Google Drive replaced by Firestore
 const DRIVE={clientId:'',apiKey:'',token:null,folderId:null,userEmail:null};
 const driveOk=()=>false;
 const driveCon=()=>false;
@@ -650,8 +693,10 @@ function chip(status){
 }
 
 // ═══════════════════════════════════════════════════════════
-// GOOGLE DRIVE (removed — using Firestore)
+// GOOGLE DRIVE
 // ═══════════════════════════════════════════════════════════
+const driveOk=()=>!!(DRIVE.clientId&&DRIVE.apiKey);
+const driveCon=()=>!!DRIVE.token;
 
 // ═══════════════════════════════════════════════════════════
 // FIRESTORE INIT & SYNC
@@ -779,13 +824,12 @@ const PMETA={
   suppliers:{t:'Suppliers',s:'Supplier database'},
   settings:{t:'Company Settings',s:'Business information and preferences'},
   firestore:{t:'Firestore Database',s:'Cloud database status, backup & restore'},
-  pin_management:{t:'PIN Management',s:'Manage staff PINs and access levels'},
+  pin_management:{t:'User Management',s:'Manage staff accounts and access levels'},
   layers_project:{t:'🐔 Layers Poultry Project',s:'Setup tracker — checklist, expenses & daily records'},
 };
 
 function nav(page){
   curPage=page;
-  // Match active state for both nav('x') and mobNav('x')
   document.querySelectorAll('.ni').forEach(el=>{
     const oc=el.getAttribute('onclick')||'';
     el.classList.toggle('active',oc===`nav('${page}')`||oc===`mobNav('${page}')`);
@@ -793,7 +837,6 @@ function nav(page){
   const m=PMETA[page]||{t:page,s:''};
   $('ptitle').textContent=m.t;$('psub').textContent=m.s;
   $('tactions').innerHTML='';
-  // Scroll to top on every page change
   const contentEl=$('content');if(contentEl)contentEl.scrollTop=0;
   const renders={
     dashboard:renderDash,quotations:()=>renderList('quotations'),
@@ -807,14 +850,10 @@ function nav(page){
     settings:renderSettings,firestore:renderFirestore,pin_management:renderPinMgmt,
     layers_project:renderLayersProject,
   };
-  try{
-    $('content').innerHTML=(renders[page]||renderDash)();
-  }catch(err){
+  try{$('content').innerHTML=(renders[page]||renderDash)();}
+  catch(err){
     console.error('Render error:',page,err);
-    $('content').innerHTML=`<div class="alert-box alert-err" style="margin:20px">
-      ⚠️ Error loading page: <strong>${err.message}</strong><br>
-      <button class="btn bg" style="margin-top:12px" onclick="nav('dashboard')">← Back to Dashboard</button>
-    </div>`;
+    $('content').innerHTML=`<div class="alert-box alert-err" style="margin:20px">⚠️ Error: <strong>${err.message}</strong><br><button class="btn bg" style="margin-top:10px" onclick="nav('dashboard')">← Dashboard</button></div>`;
   }
   setTopActions(page);
 }
@@ -875,7 +914,7 @@ function renderDash(){
     <div class="kpi kp"><div class="kpi-lbl">Pending Quotes</div><div class="kpi-val">${pendingQ}</div><div class="kpi-sub">Awaiting client response</div></div>
     <div class="kpi kt"><div class="kpi-lbl">VAT Collected</div><div class="kpi-val">${fmt(vatCollected)}</div><div class="kpi-sub">VAT paid: ${fmt(vatPaid)}</div></div>
     <div class="kpi kg"><div class="kpi-lbl">Inventory Items</div><div class="kpi-val">${DB.inventory.length}</div><div class="kpi-sub">${lowStock} low/out of stock</div></div>
-    <div class="kpi ko"><div class="kpi-lbl">Firestore Status</div><div class="kpi-val" style="font-size:16px">${fsReady?'☁️ Synced':'⚠️ Local'}</div><div class="kpi-sub">${fsReady?'Connected & syncing':'Connecting...'}</div></div>
+    <div class="kpi ko"><div class="kpi-lbl">Drive Status</div><div class="kpi-val" style="font-size:16px">${fsReady?'☁️ Synced':'⚠️ Local'}</div><div class="kpi-sub">${fsReady?'Connected & syncing':'Connecting...'}</div></div>
   </div>
   ${overdue>0?`<div class="alert-box alert-err" style="margin-bottom:16px">⚠️ <strong>${overdue} invoice${overdue!==1?'s are':' is'} overdue.</strong> <a onclick="nav('aged_debtors')" style="cursor:pointer;text-decoration:underline">View aged debtors →</a></div>`:''}
   ${lowStock>0?`<div class="alert-box alert-warn" style="margin-bottom:16px">📦 <strong>${lowStock} inventory item${lowStock!==1?'s are':' is'} low or out of stock.</strong> <a onclick="nav('inventory')" style="cursor:pointer;text-decoration:underline">View inventory →</a></div>`:''}
@@ -2271,199 +2310,350 @@ async function restoreFromFile(input){
 // PIN AUTHENTICATION SYSTEM
 // ═══════════════════════════════════════════════════════════
 const PIN_PAGES_ALL=['dashboard','quotations','purchase_orders','invoices','delivery','receipts','income','expenses','bank','pnl','balance_sheet','vat','aged_debtors','inventory','clients','suppliers','settings','firestore','pin_management','layers_project'];
-const PIN_PAGES_RESTRICTED=['dashboard','quotations','invoices','delivery','receipts','income','inventory','clients','layers_project'];
+const PIN_PAGES_RESTRICTED=['dashboard','quotations','invoices','delivery','receipts','income','inventory','clients','layers_project'];;
 
-// Default users — stored in localStorage under 'sgd_users'
+// ── AUTH SYSTEM — Username & Password ─────────────────────────
 let USERS=[];
 let currentUser=null;
-let pinBuffer='';
-let pinTargetUser=null;
 
-function defaultUsers(){
-  return[
-    {id:'admin',name:'Admin',role:'admin',pin:hashPin('1234'),pages:PIN_PAGES_ALL,active:true},
-  ];
+// Password hashing — SHA-256 via Web Crypto API
+async function hashPassword(password){
+  const enc=new TextEncoder();
+  const data=enc.encode(password+'SUMUREZA_SALT_2025');
+  const hashBuf=await crypto.subtle.digest('SHA-256',data);
+  return Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
+// Legacy PIN hash — kept for migrating old users
 function hashPin(pin){
-  // Simple obfuscation — XOR with key + base64
-  const key='SUMUREZA2025';
-  let out='';
+  const key='SUMUREZA2025';let out='';
   for(let i=0;i<pin.length;i++) out+=String.fromCharCode(pin.charCodeAt(i)^key.charCodeAt(i%key.length));
   return btoa(out);
 }
 
-function verifyPin(stored,entered){return hashPin(entered)===stored;}
+async function verifyPassword(storedHash,enteredPassword){
+  const h=await hashPassword(enteredPassword);
+  return h===storedHash;
+}
+
+function defaultUsers(){
+  // Default admin — password must be changed on first login
+  // Using sync hash for default only
+  return[{
+    id:'admin',name:'Admin',username:'admin',role:'admin',
+    password:null,// null = must set password
+    mustChangePassword:true,
+    pages:PIN_PAGES_ALL,active:true
+  }];
+}
 
 function loadUsers(){
   try{
     const u=localStorage.getItem('sgd_users');
-    if(u){
-      const parsed=JSON.parse(u);
-      if(Array.isArray(parsed)&&parsed.length>0){USERS=parsed;return;}
-    }
+    if(u){const parsed=JSON.parse(u);if(Array.isArray(parsed)&&parsed.length>0){USERS=parsed;return;}}
   }catch(e){}
-  // No valid users in storage — create defaults
   USERS=defaultUsers();
   saveUsers();
 }
 
 function saveUsers(){
   localStorage.setItem('sgd_users',JSON.stringify(USERS));
-  // Also save to Firestore so other devices get the real users
+  // Sync to Firestore so all devices get real users
   if(db&&fsReady){
-    try{
-      db.collection('store').doc('sgd_users').set({
-        data:JSON.stringify(USERS),
-        updated:Date.now()
-      });
-    }catch(e){}
-  }
-}
-
-function initPinScreen(){
-  loadUsers();
-  // ALWAYS require PIN — no bypass under any circumstance
-  // If no users in localStorage, show default screen while Firestore loads real users
-  if(!USERS||USERS.length===0){
-    USERS=defaultUsers();
-    // Don't save yet — wait for Firestore to load real users
-  }
-  showUserSel();
-  // If we only have the default placeholder, try to load real users from Firestore
-  if(USERS.length===1&&USERS[0].id==='admin'&&USERS[0].pin===hashPin('1234')){
-    tryLoadUsersFromFirestore();
+    try{db.collection('store').doc('sgd_users').set({data:JSON.stringify(USERS),updated:Date.now()});}
+    catch(e){}
   }
 }
 
 async function tryLoadUsersFromFirestore(){
-  // Wait up to 10 seconds for Firestore to be ready
   let waited=0;
-  while(!fsReady&&waited<10000){ await new Promise(r=>setTimeout(r,300)); waited+=300; }
+  while(!fsReady&&waited<10000){await new Promise(r=>setTimeout(r,300));waited+=300;}
   if(!db)return;
   try{
-    // Try to load users from Firestore store
     const snap=await db.collection('store').doc('sgd_users').get();
-    if(snap.exists&&snap.data().data){
+    if(snap.exists&&snap.data()&&snap.data().data){
       const fsUsers=JSON.parse(snap.data().data);
       if(Array.isArray(fsUsers)&&fsUsers.length>0){
-        USERS=fsUsers;
-        localStorage.setItem('sgd_users',JSON.stringify(USERS));
-        // Refresh the PIN screen with real users
-        if($('pinScreen')&&$('pinScreen').style.display!=='none'){
-          showUserSel();
+        // Only use Firestore users if they have real passwords set
+        const hasRealPasswords=fsUsers.some(u=>u.password&&!u.mustChangePassword);
+        if(hasRealPasswords){
+          USERS=fsUsers;
+          localStorage.setItem('sgd_users',JSON.stringify(USERS));
+          console.log('[Auth] Loaded',USERS.length,'user(s) from Firestore');
         }
       }
     }
-  }catch(e){ console.warn('Could not load users from Firestore',e); }
+  }catch(e){console.warn('Could not load users from Firestore',e);}
+}
+
+// ── LOGIN FLOW ──────────────────────────────────────────────────
+function initPinScreen(){
+  loadUsers();
+  // Check if this is a first-run (no user has a real password set yet)
+  const hasRealUsers = USERS.some(u => u.password && !u.mustChangePassword);
+  if(!hasRealUsers){
+    // First run — show account setup screen
+    showFirstRunSetup();
+  } else {
+    showLoginScreen();
+  }
+  // Always try to load real users from Firestore in background
+  tryLoadUsersFromFirestore().then(()=>{
+    // After loading from Firestore, re-check if we should show login or setup
+    const stillNoRealUsers = !USERS.some(u => u.password && !u.mustChangePassword);
+    if(stillNoRealUsers && $('pinScreen') && $('pinScreen').style.display !== 'none'){
+      showFirstRunSetup();
+    } else if(!stillNoRealUsers && document.getElementById('firstRunScreen')){
+      // Real users found — switch to login
+      showLoginScreen();
+    }
+  });
 }
 
 function showFirstRunSetup(){
-  // Notify admin to set up PIN
-  setTimeout(()=>{
-    toast('⚠️ Default PIN is 1234 — please change it in 🔐 PIN Management!','warn');
-  },1500);
+  // Replace the login form content with a first-run account creation screen
+  const box = document.querySelector('.login-box');
+  if(!box) return;
+  box.innerHTML = `
+    <div class="login-logo">
+      <div class="login-logo-icon">S</div>
+      <div>
+        <div class="pin-logo">SUMUREZA</div>
+        <div style="font-size:9px;color:rgba(200,150,42,.6);letter-spacing:2px;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:700">General Supplies</div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:rgba(255,255,255,.5);margin:6px 0 22px;font-family:'DM Sans',sans-serif;">Welcome! Create your admin account to get started.</div>
+    <div class="login-form">
+      <div class="login-field">
+        <label class="login-label">Your Full Name *</label>
+        <input class="login-input" id="su-name" type="text" placeholder="e.g. Susan Nalwoga" autocomplete="name">
+      </div>
+      <div class="login-field">
+        <label class="login-label">Username *</label>
+        <input class="login-input" id="su-username" type="text" placeholder="e.g. susan or admin" autocomplete="username"
+          oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9._]/g,'')">
+        <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:3px;font-family:'DM Sans',sans-serif;">Lowercase letters, numbers, dots only. This is what you type to sign in.</div>
+      </div>
+      <div class="login-field">
+        <label class="login-label">Password *</label>
+        <input class="login-input" id="su-pw1" type="password" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+      <div class="login-field">
+        <label class="login-label">Confirm Password *</label>
+        <input class="login-input" id="su-pw2" type="password" placeholder="Repeat your password" autocomplete="new-password"
+          onkeydown="if(event.key==='Enter')createFirstAdmin()">
+      </div>
+      <div class="login-err" id="su-err"></div>
+      <button class="login-btn" onclick="createFirstAdmin()" id="su-btn">Create Account & Sign In →</button>
+    </div>`;
+  setTimeout(()=>document.getElementById('su-name')?.focus(), 100);
 }
 
-function showUserSel(){
-  const active=USERS.filter(u=>u.active!==false);
-  $('pinUserSel').style.display='';
-  $('pinEntry').style.display='none';
-  pinBuffer='';pinTargetUser=null;
-  const list=$('pinUserList');
-  if(active.length===0){
-    list.innerHTML=`<button class="pin-user-btn" onclick="emergencyUnlock()" style="justify-content:center;background:rgba(200,150,42,.18);border-color:rgba(200,150,42,.5)">
-      <span style="font-size:22px">🔓</span>
-      <div><div style="font-weight:700;color:#f0c96a">Enter as Admin</div><div class="pin-user-role">Tap to continue</div></div>
-    </button>`;
+async function createFirstAdmin(){
+  const name = (document.getElementById('su-name')?.value||'').trim();
+  const username = (document.getElementById('su-username')?.value||'').trim().toLowerCase();
+  const pw1 = (document.getElementById('su-pw1')?.value||'').trim();
+  const pw2 = (document.getElementById('su-pw2')?.value||'').trim();
+  const errEl = document.getElementById('su-err');
+  const btn = document.getElementById('su-btn');
+
+  errEl.textContent = '';
+
+  if(!name){ errEl.textContent='Please enter your full name.'; document.getElementById('su-name')?.focus(); return; }
+  if(!username || username.length < 2){ errEl.textContent='Please enter a username (at least 2 characters).'; document.getElementById('su-username')?.focus(); return; }
+  if(pw1.length < 6){ errEl.textContent='Password must be at least 6 characters.'; document.getElementById('su-pw1')?.focus(); return; }
+  if(pw1 !== pw2){ errEl.textContent='Passwords do not match.'; document.getElementById('su-pw2')?.value=''; document.getElementById('su-pw2')?.focus(); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Creating account...';
+
+  const hashed = await hashPassword(pw1);
+
+  // Create the admin user
+  const adminUser = {
+    id: 'admin_' + Date.now().toString(36),
+    name: name,
+    username: username,
+    role: 'admin',
+    password: hashed,
+    mustChangePassword: false,
+    pages: PIN_PAGES_ALL,
+    active: true,
+    createdAt: new Date().toISOString()
+  };
+
+  USERS = [adminUser];
+  saveUsers(); // This saves to localStorage AND Firestore
+
+  toast('✅ Admin account created! Welcome, ' + name + '!');
+  unlockAsUser(adminUser);
+}
+function showLoginScreen(){
+  // Restore full login form in case first-run screen replaced it
+  const box = document.querySelector('.login-box');
+  if(box && !document.getElementById('loginUsername')){
+    box.innerHTML = `
+      <div class="login-logo">
+        <div class="login-logo-icon">S</div>
+        <div>
+          <div class="pin-logo">SUMUREZA</div>
+          <div style="font-size:9px;color:rgba(200,150,42,.6);letter-spacing:2px;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:700">General Supplies</div>
+        </div>
+      </div>
+      <div class="login-subtitle" id="loginSubtitle">Sign in to your account</div>
+      <div class="login-form">
+        <div class="login-field">
+          <label class="login-label">Username</label>
+          <input class="login-input" id="loginUsername" type="text"
+            placeholder="Enter your username" autocomplete="username"
+            onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
+        </div>
+        <div class="login-field">
+          <label class="login-label">Password</label>
+          <div style="position:relative">
+            <input class="login-input" id="loginPassword" type="password"
+              placeholder="Enter your password" autocomplete="current-password"
+              onkeydown="if(event.key==='Enter')attemptLogin()">
+            <button onclick="toggleLoginPwd()" id="loginPwdToggle"
+              style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:16px;padding:4px;">👁</button>
+          </div>
+        </div>
+        <div class="login-err" id="loginErr"></div>
+        <button class="login-btn" onclick="attemptLogin()" id="loginSubmitBtn">Sign In →</button>
+      </div>
+      <div id="loginLoading" style="display:none;text-align:center;color:rgba(255,255,255,.4);font-size:12px;margin-top:12px;font-family:'DM Sans',sans-serif;">
+        <span style="animation:spin 1s linear infinite;display:inline-block;margin-right:6px">⟳</span> Connecting to server...
+      </div>`;
+  }
+  if($('loginUsername')) $('loginUsername').value='';
+  if($('loginPassword')) $('loginPassword').value='';
+  if($('loginErr')) $('loginErr').textContent='';
+  if($('loginSubmitBtn')){ $('loginSubmitBtn').disabled=false; $('loginSubmitBtn').textContent='Sign In →'; }
+  if($('loginLoading')) $('loginLoading').style.display='none';
+  setTimeout(()=>$('loginUsername')?.focus(),100);
+}
+
+function toggleLoginPwd(){
+  const inp=$('loginPassword');
+  const btn=$('loginPwdToggle');
+  if(inp.type==='password'){inp.type='text';btn.textContent='🙈';}
+  else{inp.type='password';btn.textContent='👁';}
+}
+
+async function attemptLogin(){
+  const username=($('loginUsername').value||'').trim().toLowerCase();
+  const password=($('loginPassword').value||'').trim();
+  const errEl=$('loginErr');
+  const btn=$('loginSubmitBtn');
+
+  errEl.textContent='';
+
+  if(!username){errEl.textContent='Please enter your username.';$('loginUsername').focus();return;}
+  if(!password){errEl.textContent='Please enter your password.';$('loginPassword').focus();return;}
+
+  btn.disabled=true;
+  btn.textContent='Signing in...';
+
+  // Find user by username (case-insensitive)
+  const user=USERS.find(u=>u.active!==false&&
+    ((u.username||u.name||'').toLowerCase()===username||
+     (u.name||'').toLowerCase()===username));
+
+  if(!user){
+    errEl.textContent='Username not found.';
+    btn.disabled=false;btn.textContent='Sign In →';
+    $('loginUsername').focus();
     return;
   }
-  list.innerHTML=active.map(u=>`
-    <button class="pin-user-btn" onclick="selectPinUser('${u.id}')">
-      <span style="font-size:20px">${u.role==='admin'?'👑':u.role==='cashier'?'💰':u.role==='sales'?'📋':'👤'}</span>
-      <div><div style="font-weight:600">${esc(u.name)}</div><div class="pin-user-role">${u.role}</div></div>
-    </button>`).join('');
-}
 
-function emergencyUnlock(){
-  USERS=defaultUsers();
-  saveUsers();
-  unlockAsUser(USERS[0]);
-  setTimeout(()=>toast('⚠️ Logged in as default Admin (PIN: 1234). Please update your PIN in 🔐 PIN Management!','warn'),800);
-}
-
-function selectPinUser(userId){
-  pinTargetUser=USERS.find(u=>u.id===userId);
-  if(!pinTargetUser)return;
-  $('pinUserSel').style.display='none';
-  $('pinEntry').style.display='';
-  $('pinWhoLbl').textContent='Hello, '+pinTargetUser.name+'! Enter your PIN';
-  pinBuffer='';
-  renderPinDots();
-  $('pinErr').textContent='';
-}
-
-function renderPinDots(){
-  const dots=$('pinDots');
-  dots.innerHTML='';
-  for(let i=0;i<4;i++){
-    const d=document.createElement('div');
-    d.className='pin-dot'+(i<pinBuffer.length?' filled':'');
-    dots.appendChild(d);
+  // Check if user needs to set a password (first login)
+  if(!user.password||user.mustChangePassword){
+    // First time — accept any password and force change
+    showSetPasswordScreen(user,password);
+    btn.disabled=false;btn.textContent='Sign In →';
+    return;
   }
-}
 
-function pinPress(n){
-  if(pinBuffer.length>=4)return;
-  pinBuffer+=n;
-  renderPinDots();
-  $('pinErr').textContent='';
-  if(pinBuffer.length===4)setTimeout(checkPin,120);
-}
-
-function pinBack(){if(pinBuffer.length>0){pinBuffer=pinBuffer.slice(0,-1);renderPinDots();}}
-function pinClear(){pinBuffer='';renderPinDots();$('pinErr').textContent='';}
-
-function checkPin(){
-  if(!pinTargetUser)return;
-  if(verifyPin(pinTargetUser.pin,pinBuffer)){
-    unlockAsUser(pinTargetUser);
+  // Verify password
+  const ok=await verifyPassword(user.password,password);
+  if(ok){
+    unlockAsUser(user);
   } else {
-    // shake dots red
-    const dots=$('pinDots').querySelectorAll('.pin-dot');
-    dots.forEach(d=>{d.classList.add('error');d.classList.remove('filled');});
-    $('pinErr').textContent='Incorrect PIN. Try again.';
-    setTimeout(()=>{dots.forEach(d=>d.classList.remove('error'));pinBuffer='';renderPinDots();},700);
+    errEl.textContent='Incorrect password. Please try again.';
+    $('loginPassword').value='';
+    btn.disabled=false;btn.textContent='Sign In →';
+    $('loginPassword').focus();
   }
 }
+
+function showSetPasswordScreen(user,firstPassword){
+  // Show a modal to set/confirm new password
+  $('fmtitle').textContent='🔐 Set Your Password — '+user.name;
+  $('fmodalbox').style.maxWidth='420px';
+  $('fmbody').innerHTML=`
+    <div class="alert-box alert-warn" style="margin-bottom:16px">
+      ${user.mustChangePassword?'<strong>First login detected.</strong> Please set a secure password for your account.':'Set a new password for your account.'}
+    </div>
+    <div class="fg2">
+      <div class="fg s2">
+        <label class="fl">New Password *</label>
+        <input type="password" class="fi" id="sp-pw1" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+      <div class="fg s2">
+        <label class="fl">Confirm Password *</label>
+        <input type="password" class="fi" id="sp-pw2" placeholder="Repeat your password" autocomplete="new-password"
+          onkeydown="if(event.key==='Enter')saveSetPassword('${user.id}')">
+      </div>
+    </div>`;
+  $('fmfoot').innerHTML=`
+    <button class="btn bout" onclick="closeFM()">Cancel</button>
+    <button class="btn bg" onclick="saveSetPassword('${user.id}')">🔐 Set Password & Sign In</button>`;
+  $('fmodal').classList.add('open');
+  setTimeout(()=>document.getElementById('sp-pw1')?.focus(),100);
+}
+
+async function saveSetPassword(userId){
+  const pw1=(document.getElementById('sp-pw1')?.value||'').trim();
+  const pw2=(document.getElementById('sp-pw2')?.value||'').trim();
+  if(pw1.length<6){toast('Password must be at least 6 characters','warn');return;}
+  if(pw1!==pw2){toast('Passwords do not match','warn');return;}
+  const user=USERS.find(u=>u.id===userId);
+  if(!user)return;
+  user.password=await hashPassword(pw1);
+  user.mustChangePassword=false;
+  saveUsers();
+  closeFM();
+  toast('✅ Password set successfully!');
+  unlockAsUser(user);
+}
+
+// Kept for emergencyUnlock compatibility
+function showUserSel(){showLoginScreen();}
+function emergencyUnlock(){
+  USERS=defaultUsers();saveUsers();
+  toast('⚠️ Reset to defaults. Please set a new password.','warn');
+}
+
+// PIN functions replaced by username/password auth above
 
 function unlockAsUser(user){
   currentUser=user;
   $('pinScreen').style.display='none';
-  // Show/hide nav items based on role
   applyAccessControl(user);
-  // Show lock button and user info
   $('lockBtn').style.display='block';
   $('curUserBar').style.display='block';
   $('curUserBar').innerHTML=`<div style="color:rgba(255,255,255,.4);font-size:10.5px">Signed in as</div><div style="color:rgba(200,150,42,.85);font-size:12px;font-weight:700">${esc(user.name)} · ${user.role}</div>`;
-  // Show PIN management only for admin
   $('ni-pin').style.display=user.role==='admin'?'flex':'none';
-  // Navigate to dashboard
   nav('dashboard');
-  // If Firestore not ready yet, wait for it then refresh with real data
+  // Auto-refresh dashboard once Firestore data loads
   if(!fsReady){
-    const waitFS=setInterval(()=>{
-      if(fsReady){clearInterval(waitFS);nav(curPage);}
-    },300);
+    const waitFS=setInterval(()=>{if(fsReady){clearInterval(waitFS);nav(curPage);}},300);
     setTimeout(()=>clearInterval(waitFS),15000);
   }
 }
 
 function applyAccessControl(user){
-  if(user.role==='admin'){
-    document.querySelectorAll('.ni').forEach(el=>el.style.display='flex');
-    return;
-  }
+  if(user.role==='admin'){document.querySelectorAll('.ni').forEach(el=>el.style.display='flex');return;}
   const allowed=user.pages||PIN_PAGES_ALL;
   document.querySelectorAll('.ni').forEach(el=>{
     const onclick=el.getAttribute('onclick')||'';
@@ -2482,34 +2672,34 @@ function lockApp(){
   $('lockBtn').style.display='none';
   $('curUserBar').style.display='none';
   $('pinScreen').style.display='flex';
-  // Restore all nav items
   document.querySelectorAll('.ni').forEach(el=>el.style.display='flex');
-  showUserSel();
+  showLoginScreen();
 }
 
 // ═══════════════════════════════════════════════════════════
 // PIN MANAGEMENT PAGE
 // ═══════════════════════════════════════════════════════════
 function renderPinMgmt(){
-  if(currentUser?.role!=='admin'){return`<div class="alert-box alert-err">🔒 Only admins can manage PINs.</div>`;}
+  if(currentUser?.role!=='admin'){return`<div class="alert-box alert-err">🔒 Only admins can manage users.</div>`;}
   const rows=USERS.map(u=>`<tr>
-    <td><strong>${esc(u.name)}</strong></td>
-    <td>${chip(u.role==='admin'?'Active':u.role==='cashier'?'Active':u.role==='sales'?'Active':'Active')}<span style="font-size:11px;margin-left:6px;color:var(--ink-muted)">${u.role}</span></td>
+    <td><strong>${esc(u.name)}</strong><br><span class="mono" style="font-size:10.5px;color:var(--ink-muted)">${esc(u.username||u.name.toLowerCase())}</span></td>
+    <td><span style="font-size:11px;color:var(--ink-muted)">${u.role}</span></td>
     <td class="nc">${u.active!==false?'<span class="chip cg">Active</span>':'<span class="chip cr">Disabled</span>'}</td>
+    <td class="nc">${u.password?'<span class="chip cg">Set ✓</span>':'<span class="chip cr">Not set</span>'}</td>
     <td class="nc">
       <button class="btn bout bxs" onclick="openEditUser('${u.id}')">Edit</button>
-      <button class="btn bout bxs" onclick="openChangePin('${u.id}')">Change PIN</button>
+      <button class="btn bblue bxs" onclick="openChangePassword('${u.id}')">🔑 Password</button>
       ${u.id!=='admin'?`<button class="btn bred bxs" onclick="deleteUser('${u.id}')">Del</button>`:''}
     </td>
   </tr>`).join('');
 
   return`<div>
-  <div class="section-hd"><h2>🔐 PIN Management</h2><button class="btn bg" onclick="openAddUser()">+ Add Staff Member</button></div>
+  <div class="section-hd"><h2>👥 User Management</h2><button class="btn bg" onclick="openAddUser()">+ Add Staff Member</button></div>
   <div class="alert-box alert-info" style="margin-bottom:16px">
-    ℹ️ Each staff member has a 4-digit PIN. <strong>Admin</strong> can access everything. You can restrict what pages other staff can see.
+    ℹ️ Each staff member signs in with their <strong>username and password</strong>. Admins can access everything. Restrict pages per role.
   </div>
-  <div class="card"><div class="ch"><h3>Staff Users (${USERS.length})</h3></div>
-  <table class="tbl"><thead><tr><th>Name</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+  <div class="card"><div class="ch"><h3>Staff Accounts (${USERS.length})</h3></div>
+  <table class="tbl"><thead><tr><th>Name / Username</th><th>Role</th><th>Status</th><th>Password</th><th>Actions</th></tr></thead>
   <tbody>${rows}</tbody></table></div>
 
   <div class="card" style="margin-top:16px"><div class="ch"><h3>📋 Role Permissions</h3></div><div class="cb">
@@ -2813,26 +3003,29 @@ function openAddUser(){
   $('fmodalbox').style.maxWidth='460px';
   $('fmbody').innerHTML=`<div class="fg2">
     <div class="fg s2"><label class="fl">Full Name *</label><input class="fi" id="u-name" placeholder="e.g. Sarah Nakato"></div>
-    <div class="fg"><label class="fl">Role</label><select class="fs" id="u-role" onchange="roleChanged()">
+    <div class="fg"><label class="fl">Username *</label><input class="fi" id="u-username" placeholder="e.g. sarah.nakato" autocomplete="off"></div>
+    <div class="fg"><label class="fl">Role</label><select class="fs" id="u-role">
       <option value="cashier">Cashier</option>
       <option value="sales">Sales</option>
       <option value="viewer">Viewer</option>
       <option value="admin">Admin</option>
     </select></div>
-    <div class="fg"><label class="fl">4-Digit PIN *</label><input type="password" class="fi" id="u-pin" maxlength="4" placeholder="e.g. 5678" inputmode="numeric"></div>
-    <div class="fg"><label class="fl">Confirm PIN *</label><input type="password" class="fi" id="u-pin2" maxlength="4" placeholder="Repeat PIN" inputmode="numeric"></div>
+    <div class="fg"><label class="fl">Password *</label><input type="password" class="fi" id="u-pw1" placeholder="At least 6 characters" autocomplete="new-password"></div>
+    <div class="fg"><label class="fl">Confirm Password *</label><input type="password" class="fi" id="u-pw2" placeholder="Repeat password" autocomplete="new-password"></div>
     <div class="fg s2"><label class="fl" style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="u-active" checked> Account Active</label></div>
   </div>`;
   $('fmfoot').innerHTML=`<button class="btn bout" onclick="closeFM()">Cancel</button><button class="btn bg" onclick="saveNewUser()">💾 Add User</button>`;
   $('fmodal').classList.add('open');
+  setTimeout(()=>document.getElementById('u-name')?.focus(),100);
 }
 
 function openEditUser(uid2){
   const u=USERS.find(x=>x.id===uid2);if(!u)return;
-  $('fmtitle').textContent='Edit — '+u.name;
+  $('fmtitle').textContent='Edit User — '+u.name;
   $('fmodalbox').style.maxWidth='460px';
   $('fmbody').innerHTML=`<div class="fg2">
     <div class="fg s2"><label class="fl">Full Name *</label><input class="fi" id="u-name" value="${esc(u.name)}"></div>
+    <div class="fg s2"><label class="fl">Username *</label><input class="fi" id="u-username" value="${esc(u.username||u.name.toLowerCase().replace(/\s+/g,'.'))}"></div>
     <div class="fg"><label class="fl">Role</label><select class="fs" id="u-role">
       ${['cashier','sales','viewer','admin'].map(r=>`<option value="${r}" ${u.role===r?'selected':''}>${r.charAt(0).toUpperCase()+r.slice(1)}</option>`).join('')}
     </select></div>
@@ -2842,45 +3035,56 @@ function openEditUser(uid2){
   $('fmodal').classList.add('open');
 }
 
-function openChangePin(uid2){
+function openChangePassword(uid2){
   const u=USERS.find(x=>x.id===uid2);if(!u)return;
-  $('fmtitle').textContent='Change PIN — '+u.name;
+  $('fmtitle').textContent='Change Password — '+u.name;
   $('fmodalbox').style.maxWidth='400px';
   $('fmbody').innerHTML=`<div class="fg2">
-    <div class="fg s2"><label class="fl">New 4-Digit PIN *</label><input type="password" class="fi" id="u-pin" maxlength="4" placeholder="e.g. 9012" inputmode="numeric"></div>
-    <div class="fg s2"><label class="fl">Confirm New PIN *</label><input type="password" class="fi" id="u-pin2" maxlength="4" placeholder="Repeat PIN" inputmode="numeric"></div>
+    <div class="fg s2"><label class="fl">New Password *</label><input type="password" class="fi" id="u-pw1" placeholder="At least 6 characters" autocomplete="new-password"></div>
+    <div class="fg s2"><label class="fl">Confirm New Password *</label><input type="password" class="fi" id="u-pw2" placeholder="Repeat password" autocomplete="new-password"></div>
   </div>`;
-  $('fmfoot').innerHTML=`<button class="btn bout" onclick="closeFM()">Cancel</button><button class="btn bg" onclick="saveChangePin('${uid2}')">🔑 Update PIN</button>`;
+  $('fmfoot').innerHTML=`<button class="btn bout" onclick="closeFM()">Cancel</button><button class="btn bg" onclick="saveChangePassword('${uid2}')">🔑 Update Password</button>`;
   $('fmodal').classList.add('open');
+  setTimeout(()=>document.getElementById('u-pw1')?.focus(),100);
 }
 
-function saveNewUser(){
-  const name=gv('u-name').trim(),role=gv('u-role'),pin=gv('u-pin'),pin2=gv('u-pin2'),active=$('u-active').checked;
+async function saveNewUser(){
+  const name=gv('u-name').trim();
+  const username=(gv('u-username')||'').trim().toLowerCase()||name.toLowerCase().replace(/\s+/g,'.');
+  const role=gv('u-role');
+  const pw1=(document.getElementById('u-pw1')?.value||'').trim();
+  const pw2=(document.getElementById('u-pw2')?.value||'').trim();
+  const active=$('u-active').checked;
   if(!name){toast('Name required','warn');return;}
-  if(!/^\d{4}$/.test(pin)){toast('PIN must be exactly 4 digits','warn');return;}
-  if(pin!==pin2){toast('PINs do not match','warn');return;}
-  USERS.push({id:uid(),name,role,pin:hashPin(pin),pages:ROLE_PAGES[role]||PIN_PAGES_RESTRICTED,active});
+  if(!username){toast('Username required','warn');return;}
+  if(USERS.find(u=>( u.username||u.name.toLowerCase())===username)){toast('Username already exists','warn');return;}
+  if(pw1.length<6){toast('Password must be at least 6 characters','warn');return;}
+  if(pw1!==pw2){toast('Passwords do not match','warn');return;}
+  const hashed=await hashPassword(pw1);
+  USERS.push({id:uid(),name,username,role,password:hashed,mustChangePassword:false,pages:ROLE_PAGES[role]||PIN_PAGES_RESTRICTED,active});
   saveUsers();closeFM();toast('✅ Staff member added!');nav('pin_management');
 }
 
 function saveEditUser(uid2){
   const u=USERS.find(x=>x.id===uid2);if(!u)return;
   u.name=gv('u-name').trim()||u.name;
+  u.username=(gv('u-username')||'').trim().toLowerCase()||u.username||u.name.toLowerCase().replace(/\s+/g,'.');
   u.role=gv('u-role');
   u.pages=ROLE_PAGES[u.role]||PIN_PAGES_RESTRICTED;
   u.active=$('u-active').checked;
   saveUsers();closeFM();toast('✅ User updated!');nav('pin_management');
 }
 
-function saveChangePin(uid2){
+async function saveChangePassword(uid2){
   const u=USERS.find(x=>x.id===uid2);if(!u)return;
-  const pin=gv('u-pin'),pin2=gv('u-pin2');
-  if(!/^\d{4}$/.test(pin)){toast('PIN must be 4 digits','warn');return;}
-  if(pin!==pin2){toast('PINs do not match','warn');return;}
-  u.pin=hashPin(pin);
+  const pw1=(document.getElementById('u-pw1')?.value||'').trim();
+  const pw2=(document.getElementById('u-pw2')?.value||'').trim();
+  if(pw1.length<6){toast('Password must be at least 6 characters','warn');return;}
+  if(pw1!==pw2){toast('Passwords do not match','warn');return;}
+  u.password=await hashPassword(pw1);
+  u.mustChangePassword=false;
   saveUsers();closeFM();
-  localStorage.setItem('sgd_pin_setup','1');
-  toast('✅ PIN changed successfully!');nav('pin_management');
+  toast('✅ Password updated successfully!');nav('pin_management');
 }
 
 function deleteUser(uid2){
@@ -2930,12 +3134,8 @@ initPinScreen();
         initPinScreen();
       }
       await lpLoadFromFirestore().catch(e=>console.warn('LP load err',e));
-      if(currentUser){
-        nav(curPage);
-        toast('🔥 Firestore connected — data loaded!');
-      } else {
-        toast('🔥 Firestore ready — please sign in');
-      }
+      if(currentUser){nav(curPage);toast('🔥 Firestore connected — data loaded!');}
+      else{toast('🔥 Firestore ready — please sign in');}
     });
   });
 })();
