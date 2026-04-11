@@ -15,11 +15,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="Sumureza">
 <meta name="description" content="Sumureza General Supplies — Business Accounting Suite">
-<meta name="app-version" content="2.2.0">
+<meta name="app-version" content="2.1.0">
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -249,67 +246,65 @@ input[type=checkbox]{accent-color:var(--gold);}
 /* MOBILE RESPONSIVE */
 /* ── MOBILE ─────────────────────────────────────────── */
 @media(max-width:768px){
-  body{flex-direction:column;overflow:hidden;height:100vh;}
-
-  /* Hide desktop sidebar entirely on mobile */
-  .sb{display:none;}
-
-  /* Mobile top header bar */
+  body{flex-direction:column!important;overflow:hidden!important;height:100vh!important;height:100dvh!important;}
+  .sb{display:none!important;width:0!important;min-width:0!important;overflow:hidden!important;}
   .mob-header{display:flex!important;}
-
-  /* Main fills screen, scrolls internally */
-  .main{flex:1;display:flex;flex-direction:column;overflow:hidden;height:100%;}
-  .topbar{padding:10px 14px;flex-shrink:0;}
-  .ptitle{font-size:14px;}.psub{display:none;}
-  .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 14px;padding-bottom:80px;}
-
-  /* Bottom nav bar */
   .mob-nav{display:flex!important;}
-
-  /* Cards & grids */
-  .kgrid.kg4{grid-template-columns:repeat(2,1fr);}
-  .kgrid.kg3{grid-template-columns:repeat(2,1fr);}
-  .kpi{padding:12px 14px;}.kpi-val{font-size:15px;}
-  .fg2,.fg3,.fg4{grid-template-columns:1fr 1fr;}
-  .s2,.s3,.s4{grid-column:span 2;}
-  .card{margin-bottom:12px;}
-  .tbl{font-size:11px;display:block;overflow-x:auto;}
-  .tbl thead th{padding:7px 8px;font-size:9px;}
-  .tbl td{padding:7px 8px;}
-  .btn{font-size:11px;padding:6px 11px;}
-  .mbox{margin:6px;border-radius:8px;width:calc(100% - 12px)!important;max-width:unset!important;}
-  .mbody{padding:14px;}
-  .pin-box{width:88vw;max-width:320px;padding:28px 18px;}
-  .pin-btn{padding:13px;font-size:17px;}
-  .twrap{padding:8px 10px;}
-  .tbox{min-width:unset;width:100%;}
-  .docpaper{padding:18px 14px;}
-  .dh{flex-direction:column;gap:10px;}
-  .dpar{grid-template-columns:1fr;}
-  .itbl td input,.itbl td select{font-size:11px;}
-  .tab{padding:7px 11px;font-size:11.5px;}
-  #tactions{flex-wrap:wrap;gap:6px;}
+  .main{flex:1!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;min-height:0!important;}
+  .topbar{padding:8px 14px!important;flex-shrink:0!important;}
+  .ptitle{font-size:14px!important;}.psub{display:none!important;}
+  .content{flex:1!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;padding:12px 12px 88px!important;min-height:0!important;}
+  #tactions{flex-wrap:wrap!important;gap:6px!important;}
+  .kgrid.kg4{grid-template-columns:repeat(2,1fr)!important;}
+  .kgrid.kg3{grid-template-columns:repeat(2,1fr)!important;}
+  .kpi{padding:11px 13px!important;}.kpi-val{font-size:15px!important;}
+  .kpi-lbl{font-size:9.5px!important;}.kpi-sub{font-size:9.5px!important;}
+  .fg2,.fg3,.fg4{grid-template-columns:1fr 1fr!important;}
+  .s2,.s3,.s4{grid-column:span 2!important;}
+  .card{margin-bottom:10px!important;}
+  .tbl{font-size:11px!important;display:block!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  .tbl thead th{padding:6px 8px!important;font-size:9px!important;white-space:nowrap!important;}
+  .tbl td{padding:6px 8px!important;white-space:nowrap!important;}
+  .btn{font-size:11px!important;padding:6px 10px!important;}
+  .bsm{padding:4px 8px!important;font-size:10.5px!important;}
+  .bxs{padding:3px 6px!important;font-size:10px!important;}
+  .mbg{padding:8px!important;}
+  .mbox{margin:0!important;border-radius:10px!important;width:100%!important;max-width:unset!important;}
+  .mbody{padding:14px!important;}.mfoot{padding:10px 14px!important;}
+  .pin-box{width:92vw!important;max-width:340px!important;padding:28px 16px!important;}
+  .pin-btn{padding:14px!important;font-size:18px!important;}
+  .twrap{padding:8px 10px!important;}.tbox{min-width:unset!important;width:100%!important;}
+  .docpaper{padding:18px 14px!important;}
+  .dh{flex-direction:column!important;gap:10px!important;}
+  .dpar{grid-template-columns:1fr!important;}
+  .dtn{text-align:left!important;font-size:20px!important;}
+  .itbl td input,.itbl td select{font-size:11px!important;}
+  .tab{padding:7px 10px!important;font-size:11px!important;}
+  .chip{font-size:9px!important;padding:2px 6px!important;}
 }
 @media(max-width:480px){
-  .fg2{grid-template-columns:1fr;}
-  .s2{grid-column:span 1;}
-  .kgrid.kg4{grid-template-columns:1fr 1fr;}
-  .kpi-val{font-size:13px;}
+  .fg2{grid-template-columns:1fr!important;}
+  .s2{grid-column:span 1!important;}
+  .kgrid.kg4{grid-template-columns:1fr 1fr!important;}
+  .kpi-val{font-size:14px!important;}
+  .content{padding:10px 10px 88px!important;}
 }
 
 /* Mobile header — hidden on desktop */
 .mob-header{
   display:none;
   background:linear-gradient(90deg,#0d1720,#152030);
-  padding:10px 16px;
+  padding:11px 16px;
   align-items:center;
   justify-content:space-between;
   flex-shrink:0;
-  border-bottom:1px solid rgba(200,150,42,.18);
+  border-bottom:1px solid rgba(200,150,42,.22);
+  min-height:52px;
 }
-.mob-logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:#fff;}
-.mob-logo span{color:var(--gold);font-size:9px;display:block;letter-spacing:1.5px;font-family:'DM Sans',sans-serif;font-weight:600;margin-top:1px;}
-.mob-menu-btn{background:none;border:1px solid rgba(200,150,42,.35);color:var(--gold-light);font-size:13px;padding:6px 12px;border-radius:5px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.mob-logo{font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:#fff;line-height:1.2;}
+.mob-logo span{color:var(--gold);font-size:8.5px;display:block;letter-spacing:2px;font-family:'DM Sans',sans-serif;font-weight:700;margin-top:2px;}
+.mob-menu-btn{background:rgba(200,150,42,.12);border:1px solid rgba(200,150,42,.4);color:var(--gold-light);font-size:12px;padding:8px 14px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;-webkit-tap-highlight-color:transparent;white-space:nowrap;}
+.mob-menu-btn:active{background:rgba(200,150,42,.25);}
 
 /* Mobile nav drawer */
 .mob-drawer{
@@ -320,12 +315,15 @@ input[type=checkbox]{accent-color:var(--gold);}
 .mob-drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.55);}
 .mob-drawer-panel{
   position:relative;z-index:1;
-  width:80%;max-width:300px;
+  width:82%;max-width:300px;
   background:linear-gradient(175deg,#0d1720,#152030);
   height:100%;overflow-y:auto;
   display:flex;flex-direction:column;
-  border-right:1px solid rgba(200,150,42,.18);
+  border-right:1px solid rgba(200,150,42,.22);
+  box-shadow:4px 0 28px rgba(0,0,0,.5);
 }
+.mob-drawer-panel::-webkit-scrollbar{width:3px;}
+.mob-drawer-panel::-webkit-scrollbar-thumb{background:rgba(200,150,42,.2);}
 .mob-drawer-head{padding:20px 16px 14px;border-bottom:1px solid rgba(200,150,42,.12);}
 .mob-drawer-head h2{font-family:'Playfair Display',serif;font-size:15px;font-weight:900;color:#fff;}
 .mob-drawer-head p{font-size:9.5px;color:rgba(240,201,106,.5);margin-top:2px;}
@@ -339,19 +337,26 @@ input[type=checkbox]{accent-color:var(--gold);}
 .mob-nav{
   display:none;
   position:fixed;bottom:0;left:0;right:0;
-  background:#0d1720;
-  border-top:1px solid rgba(200,150,42,.2);
-  z-index:200;
+  background:linear-gradient(180deg,#0e1a27,#0a1420);
+  border-top:1px solid rgba(200,150,42,.25);
+  z-index:300;
   justify-content:space-around;
-  padding:6px 0 env(safe-area-inset-bottom,6px);
+  align-items:stretch;
+  padding:4px 0 env(safe-area-inset-bottom,8px);
+  box-shadow:0 -4px 20px rgba(0,0,0,.45);
 }
 .mob-nav-item{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:4px 8px;cursor:pointer;color:rgba(255,255,255,.38);
-  font-size:9px;font-weight:600;letter-spacing:.3px;min-width:52px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:6px 4px 4px;cursor:pointer;color:rgba(255,255,255,.35);
+  font-size:9px;font-weight:600;letter-spacing:.2px;
+  min-width:52px;flex:1;transition:color .15s;
+  -webkit-tap-highlight-color:transparent;position:relative;
 }
+.mob-nav-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);border-radius:0 0 3px 3px;transition:width .2s;}
 .mob-nav-item.active{color:var(--gold);}
-.mob-nav-item .mni-ico{font-size:20px;}
+.mob-nav-item.active::before{width:28px;}
+.mob-nav-item:active{color:var(--gold-light);}
+.mob-nav-item .mni-ico{font-size:22px;line-height:1;}
 
 /* PIN AUTH */
 .pin-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0d1720 0%,#152030 60%,#1a2a40 100%);z-index:9999;display:flex;align-items:center;justify-content:center;}
@@ -441,6 +446,7 @@ input[type=checkbox]{accent-color:var(--gold);}
     <div class="nav-sec">Finance</div>
     <div class="ni" onclick="mobNav('income')"><span class="ni-ico">💰</span>Income</div>
     <div class="ni" onclick="mobNav('expenses')"><span class="ni-ico">💸</span>Expenses</div>
+    <div class="ni" onclick="mobNav('bank')"><span class="ni-ico">🏦</span>Bank Reconciliation</div>
     <div class="nav-sec">Reports</div>
     <div class="ni" onclick="mobNav('pnl')"><span class="ni-ico">📈</span>Profit & Loss</div>
     <div class="ni" onclick="mobNav('balance_sheet')"><span class="ni-ico">⚖️</span>Balance Sheet</div>
@@ -451,6 +457,9 @@ input[type=checkbox]{accent-color:var(--gold);}
     <div class="nav-sec">Settings</div>
     <div class="ni" onclick="mobNav('settings')"><span class="ni-ico">⚙️</span>Company Settings</div>
     <div class="ni" onclick="mobNav('firestore')"><span class="ni-ico">🔥</span>Firestore DB</div>
+    <div style="margin:16px 8px 8px;padding-top:14px;border-top:1px solid rgba(200,150,42,.12)">
+      <button onclick="closeMobDrawer();lockApp()" style="width:100%;padding:11px;background:rgba(139,32,32,.18);border:1px solid rgba(139,32,32,.35);border-radius:5px;color:#e07070;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;">🔒 Lock App</button>
+    </div>
   </div>
 </div>
 
@@ -510,10 +519,6 @@ input[type=checkbox]{accent-color:var(--gold);}
 
 <!-- MAIN -->
 <div class="main">
-  <div id="update-banner" style="display:none;background:#1a6b45;color:#fff;padding:8px 16px;font-size:12px;font-weight:600;display:none;align-items:center;justify-content:space-between;flex-shrink:0;">
-    <span>🔄 New version available!</span>
-    <button onclick="forceRefreshApp()" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;padding:4px 12px;border-radius:4px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;">Update Now</button>
-  </div>
   <div class="topbar">
     <div><div class="ptitle" id="ptitle">Dashboard</div><div class="psub" id="psub">Business overview</div></div>
     <div id="tactions" style="display:flex;gap:9px;align-items:center;"></div>
@@ -779,10 +784,17 @@ const PMETA={
 
 function nav(page){
   curPage=page;
-  document.querySelectorAll('.ni').forEach(el=>el.classList.toggle('active',el.getAttribute('onclick')===`nav('${page}')`));
+  // Update active state — match both nav('x') and mobNav('x') onclick patterns
+  document.querySelectorAll('.ni').forEach(el=>{
+    const oc=el.getAttribute('onclick')||'';
+    const isActive=oc===`nav('${page}')`||oc===`mobNav('${page}')`;
+    el.classList.toggle('active',isActive);
+  });
   const m=PMETA[page]||{t:page,s:''};
   $('ptitle').textContent=m.t;$('psub').textContent=m.s;
   $('tactions').innerHTML='';
+  // Scroll content area back to top on every page change
+  const contentEl=$('content');if(contentEl)contentEl.scrollTop=0;
   const renders={
     dashboard:renderDash,quotations:()=>renderList('quotations'),
     purchase_orders:()=>renderList('purchase_orders'),
@@ -795,7 +807,13 @@ function nav(page){
     settings:renderSettings,firestore:renderFirestore,pin_management:renderPinMgmt,
     layers_project:renderLayersProject,
   };
-  $('content').innerHTML=(renders[page]||renderDash)();
+  const renderer=renders[page]||renderDash;
+  try{
+    $('content').innerHTML=renderer();
+  } catch(err){
+    console.error('Render error on page',page,err);
+    $('content').innerHTML=`<div class="alert-box alert-err">Error loading page: ${err.message}. <button class="btn bg bsm" onclick="nav('dashboard')">Go to Dashboard</button></div>`;
+  }
   setTopActions(page);
 }
 
@@ -2161,20 +2179,6 @@ function renderFirestore(){
     </div>
   </div>
 
-  <div class="card" style="margin-bottom:18px">
-    <div class="ch"><h3>🔄 Cache & App Version</h3></div>
-    <div class="cb">
-      <div class="alert-box alert-warn" style="margin-bottom:14px">
-        <strong>Having issues with old data showing?</strong> Clear the app cache to force a fresh load.
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
-        <button id="force-refresh-btn" class="btn bred" onclick="forceRefreshApp()">🗑️ Clear Cache & Reload</button>
-        <span style="font-size:12px;color:var(--ink-muted)">App version: 2.2.0</span>
-      </div>
-      <p style="font-size:12px;color:var(--ink-soft)">This clears the browser cache and service worker, then reloads the latest version from GitHub.</p>
-    </div>
-  </div>
-
   <div class="card">
     <div class="ch"><h3>💾 Backup & Restore</h3></div>
     <div class="cb" style="display:flex;gap:10px;flex-wrap:wrap">
@@ -2306,32 +2310,26 @@ function saveUsers(){localStorage.setItem('sgd_users',JSON.stringify(USERS));}
 
 function initPinScreen(){
   loadUsers();
-  // No users at all (empty localStorage on new device) — skip PIN, go straight in
+  // If no users exist at all (fresh install), create defaults but STILL require PIN
   if(!USERS||USERS.length===0){
-    $('pinScreen').style.display='none';
-    return;
+    USERS=defaultUsers();
+    saveUsers();
   }
   const active=USERS.filter(u=>u.active!==false);
-  // Only default admin with default PIN 1234 — skip PIN, show setup reminder
-  if(USERS.length===1&&USERS[0].pin===hashPin('1234')&&!localStorage.getItem('sgd_pin_setup')){
-    unlockAsUser(USERS[0]);
-    showFirstRunSetup();
-    return;
-  }
-  // No active users somehow — skip PIN
+  // No active users — ensure at least admin exists
   if(active.length===0){
-    if(USERS.length>0)unlockAsUser(USERS[0]);
-    else $('pinScreen').style.display='none';
-    return;
+    USERS=defaultUsers();
+    saveUsers();
   }
+  // ALWAYS show the user selection screen — no bypassing PIN under any circumstance
   showUserSel();
 }
 
 function showFirstRunSetup(){
-  // Notify admin to set up PIN
+  // Just a reminder — PIN is still required to enter
   setTimeout(()=>{
-    toast('⚠️ Default PIN is 1234 — please change it in 🔐 PIN Management!','warn');
-  },1500);
+    toast('ℹ️ Tip: Change your PIN in 🔐 PIN Management for better security.','warn');
+  },2000);
 }
 
 function showUserSel(){
@@ -2419,17 +2417,33 @@ function unlockAsUser(user){
   $('ni-pin').style.display=user.role==='admin'?'flex':'none';
   // Navigate to dashboard
   nav('dashboard');
+  // If Firestore is already ready, data is available — render immediately.
+  // If not ready yet, wait for it to load then re-render the dashboard.
+  if(!fsReady){
+    const waitForFS = setInterval(()=>{
+      if(fsReady){
+        clearInterval(waitForFS);
+        nav(curPage);
+      }
+    }, 300);
+    // Give up after 15 seconds
+    setTimeout(()=>clearInterval(waitForFS), 15000);
+  }
 }
 
 function applyAccessControl(user){
+  if(user.role==='admin'){
+    document.querySelectorAll('.ni').forEach(el=>el.style.display='flex');
+    return;
+  }
   const allowed=user.pages||PIN_PAGES_ALL;
   document.querySelectorAll('.ni').forEach(el=>{
     const onclick=el.getAttribute('onclick')||'';
-    const match=onclick.match(/nav\('([^']+)'\)/);
+    const match=onclick.match(/(?:mob)?[Nn]av\('([^']+)'\)/);
     if(match){
       const page=match[1];
-      if(page==='pin_management')return; // handled separately
-      el.style.display=(!allowed.includes(page)&&user.role!=='admin')?'none':'flex';
+      if(page==='pin_management')return;
+      el.style.display=(!allowed.includes(page))?'none':'flex';
     }
   });
 }
@@ -2888,75 +2902,40 @@ initPinScreen();
         initPinScreen();
       }
       await lpLoadFromFirestore().catch(e=>console.warn('LP load err',e));
-      nav(curPage);
-      toast('🔥 Firestore connected — data loaded!');
+      // Only refresh the page view if the user is already logged in
+      // (if PIN screen is showing, the page will refresh automatically after login)
+      if(currentUser){
+        nav(curPage);
+        toast('🔥 Firestore connected — data refreshed!');
+      } else {
+        toast('🔥 Firestore ready — sign in to load your data!');
+      }
     });
   });
 })();
 
-// ── SERVICE WORKER — aggressive cache busting ──────────────────
+// Register Service Worker (PWA) — unregister old SW first to force fresh load
 if('serviceWorker' in navigator){
-  window.addEventListener('load',async()=>{
-    // Step 1: Unregister ALL existing service workers
-    const regs = await navigator.serviceWorker.getRegistrations();
-    for(const reg of regs){ await reg.unregister(); }
-
-    // Step 2: Clear ALL caches
-    if('caches' in window){
-      const keys = await caches.keys();
-      for(const key of keys){ await caches.delete(key); }
-      if(keys.length>0) console.log('[Cache] Cleared',keys.length,'cache(s)');
-    }
-
-    // Step 3: Re-register fresh SW
-    try{
-      const reg = await navigator.serviceWorker.register('/sumureza/sw.js?v=2.2.0');
-      console.log('[PWA] SW registered:', reg.scope);
-
-      // Force immediate activation of any waiting SW
-      reg.addEventListener('updatefound',()=>{
-        const nw = reg.installing;
-        nw.addEventListener('statechange',()=>{
-          if(nw.state==='installed'){
-            if(navigator.serviceWorker.controller){
-              // New SW waiting — force it to take over immediately
-              nw.postMessage({type:'SKIP_WAITING'});
-              setTimeout(()=>window.location.reload(),500);
+  window.addEventListener('load',()=>{
+    // Unregister any old service workers to clear stale cache
+    navigator.serviceWorker.getRegistrations().then(regs=>{
+      regs.forEach(r=>r.unregister());
+    });
+    navigator.serviceWorker.register('/sumureza/sw.js')
+      .then(reg=>{
+        console.log('[PWA] Service worker registered:', reg.scope);
+        // Check for updates
+        reg.addEventListener('updatefound',()=>{
+          const nw=reg.installing;
+          nw.addEventListener('statechange',()=>{
+            if(nw.state==='installed'&&navigator.serviceWorker.controller){
+              toast('🔄 App updated! Refresh to get the latest version.','warn');
             }
-          }
+          });
         });
-      });
-
-      // If controller changes (new SW took over), reload
-      navigator.serviceWorker.addEventListener('controllerchange',()=>{
-        window.location.reload();
-      });
-    } catch(err){
-      console.warn('[PWA] SW failed:',err);
-    }
+      })
+      .catch(err=>console.warn('[PWA] SW registration failed:',err));
   });
-}
-
-// ── FORCE REFRESH function (callable from UI) ──────────────────
-async function forceRefreshApp(){
-  const btn = document.getElementById('force-refresh-btn');
-  if(btn){ btn.innerHTML='⏳ Clearing cache...'; btn.disabled=true; }
-  try{
-    // Unregister all SWs
-    if('serviceWorker' in navigator){
-      const regs = await navigator.serviceWorker.getRegistrations();
-      for(const reg of regs){ await reg.unregister(); }
-    }
-    // Clear all caches
-    if('caches' in window){
-      const keys = await caches.keys();
-      for(const key of keys){ await caches.delete(key); }
-    }
-    toast('✅ Cache cleared! Reloading now...');
-    setTimeout(()=>window.location.reload(true), 800);
-  } catch(e){
-    window.location.reload(true);
-  }
 }
 </script>
 </body>
