@@ -348,9 +348,8 @@ input[type=checkbox]{accent-color:var(--gold);}
 .mob-nav-item{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
   padding:6px 4px 4px;cursor:pointer;color:rgba(255,255,255,.35);
-  font-size:9px;font-weight:600;letter-spacing:.2px;
-  min-width:52px;flex:1;transition:color .15s;
-  -webkit-tap-highlight-color:transparent;position:relative;
+  font-size:9px;font-weight:600;min-width:52px;flex:1;
+  -webkit-tap-highlight-color:transparent;position:relative;transition:color .15s;
 }
 .mob-nav-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);border-radius:0 0 3px 3px;transition:width .2s;}
 .mob-nav-item.active{color:var(--gold);}
@@ -585,6 +584,10 @@ const FBCONFIG={
   messagingSenderId:"105210091754",
   appId:"1:105210091754:web:bf578781a6e9a844c21f93"
 };
+// DRIVE stub — Google Drive removed, using Firestore instead
+const DRIVE={clientId:'',apiKey:'',token:null,folderId:null,userEmail:null};
+const driveOk=()=>false;
+const driveCon=()=>false;
 let db=null; // Firestore instance
 let fsReady=false;
 let fsSyncing=false;
@@ -647,10 +650,8 @@ function chip(status){
 }
 
 // ═══════════════════════════════════════════════════════════
-// GOOGLE DRIVE
+// GOOGLE DRIVE (removed — using Firestore)
 // ═══════════════════════════════════════════════════════════
-const driveOk=()=>!!(DRIVE.clientId&&DRIVE.apiKey);
-const driveCon=()=>!!DRIVE.token;
 
 // ═══════════════════════════════════════════════════════════
 // FIRESTORE INIT & SYNC
@@ -784,16 +785,15 @@ const PMETA={
 
 function nav(page){
   curPage=page;
-  // Update active state — match both nav('x') and mobNav('x') onclick patterns
+  // Match active state for both nav('x') and mobNav('x')
   document.querySelectorAll('.ni').forEach(el=>{
     const oc=el.getAttribute('onclick')||'';
-    const isActive=oc===`nav('${page}')`||oc===`mobNav('${page}')`;
-    el.classList.toggle('active',isActive);
+    el.classList.toggle('active',oc===`nav('${page}')`||oc===`mobNav('${page}')`);
   });
   const m=PMETA[page]||{t:page,s:''};
   $('ptitle').textContent=m.t;$('psub').textContent=m.s;
   $('tactions').innerHTML='';
-  // Scroll content area back to top on every page change
+  // Scroll to top on every page change
   const contentEl=$('content');if(contentEl)contentEl.scrollTop=0;
   const renders={
     dashboard:renderDash,quotations:()=>renderList('quotations'),
@@ -807,12 +807,14 @@ function nav(page){
     settings:renderSettings,firestore:renderFirestore,pin_management:renderPinMgmt,
     layers_project:renderLayersProject,
   };
-  const renderer=renders[page]||renderDash;
   try{
-    $('content').innerHTML=renderer();
-  } catch(err){
-    console.error('Render error on page',page,err);
-    $('content').innerHTML=`<div class="alert-box alert-err">Error loading page: ${err.message}. <button class="btn bg bsm" onclick="nav('dashboard')">Go to Dashboard</button></div>`;
+    $('content').innerHTML=(renders[page]||renderDash)();
+  }catch(err){
+    console.error('Render error:',page,err);
+    $('content').innerHTML=`<div class="alert-box alert-err" style="margin:20px">
+      ⚠️ Error loading page: <strong>${err.message}</strong><br>
+      <button class="btn bg" style="margin-top:12px" onclick="nav('dashboard')">← Back to Dashboard</button>
+    </div>`;
   }
   setTopActions(page);
 }
@@ -873,7 +875,7 @@ function renderDash(){
     <div class="kpi kp"><div class="kpi-lbl">Pending Quotes</div><div class="kpi-val">${pendingQ}</div><div class="kpi-sub">Awaiting client response</div></div>
     <div class="kpi kt"><div class="kpi-lbl">VAT Collected</div><div class="kpi-val">${fmt(vatCollected)}</div><div class="kpi-sub">VAT paid: ${fmt(vatPaid)}</div></div>
     <div class="kpi kg"><div class="kpi-lbl">Inventory Items</div><div class="kpi-val">${DB.inventory.length}</div><div class="kpi-sub">${lowStock} low/out of stock</div></div>
-    <div class="kpi ko"><div class="kpi-lbl">Drive Status</div><div class="kpi-val" style="font-size:16px">${fsReady?'☁️ Synced':'⚠️ Local'}</div><div class="kpi-sub">${fsReady?(DRIVE.userEmail||'Connected'):'Not connected to Drive'}</div></div>
+    <div class="kpi ko"><div class="kpi-lbl">Firestore Status</div><div class="kpi-val" style="font-size:16px">${fsReady?'☁️ Synced':'⚠️ Local'}</div><div class="kpi-sub">${fsReady?'Connected & syncing':'Connecting...'}</div></div>
   </div>
   ${overdue>0?`<div class="alert-box alert-err" style="margin-bottom:16px">⚠️ <strong>${overdue} invoice${overdue!==1?'s are':' is'} overdue.</strong> <a onclick="nav('aged_debtors')" style="cursor:pointer;text-decoration:underline">View aged debtors →</a></div>`:''}
   ${lowStock>0?`<div class="alert-box alert-warn" style="margin-bottom:16px">📦 <strong>${lowStock} inventory item${lowStock!==1?'s are':' is'} low or out of stock.</strong> <a onclick="nav('inventory')" style="cursor:pointer;text-decoration:underline">View inventory →</a></div>`:''}
@@ -2306,30 +2308,61 @@ function loadUsers(){
   saveUsers();
 }
 
-function saveUsers(){localStorage.setItem('sgd_users',JSON.stringify(USERS));}
+function saveUsers(){
+  localStorage.setItem('sgd_users',JSON.stringify(USERS));
+  // Also save to Firestore so other devices get the real users
+  if(db&&fsReady){
+    try{
+      db.collection('store').doc('sgd_users').set({
+        data:JSON.stringify(USERS),
+        updated:Date.now()
+      });
+    }catch(e){}
+  }
+}
 
 function initPinScreen(){
   loadUsers();
-  // If no users exist at all (fresh install), create defaults but STILL require PIN
+  // ALWAYS require PIN — no bypass under any circumstance
+  // If no users in localStorage, show default screen while Firestore loads real users
   if(!USERS||USERS.length===0){
     USERS=defaultUsers();
-    saveUsers();
+    // Don't save yet — wait for Firestore to load real users
   }
-  const active=USERS.filter(u=>u.active!==false);
-  // No active users — ensure at least admin exists
-  if(active.length===0){
-    USERS=defaultUsers();
-    saveUsers();
-  }
-  // ALWAYS show the user selection screen — no bypassing PIN under any circumstance
   showUserSel();
+  // If we only have the default placeholder, try to load real users from Firestore
+  if(USERS.length===1&&USERS[0].id==='admin'&&USERS[0].pin===hashPin('1234')){
+    tryLoadUsersFromFirestore();
+  }
+}
+
+async function tryLoadUsersFromFirestore(){
+  // Wait up to 10 seconds for Firestore to be ready
+  let waited=0;
+  while(!fsReady&&waited<10000){ await new Promise(r=>setTimeout(r,300)); waited+=300; }
+  if(!db)return;
+  try{
+    // Try to load users from Firestore store
+    const snap=await db.collection('store').doc('sgd_users').get();
+    if(snap.exists&&snap.data().data){
+      const fsUsers=JSON.parse(snap.data().data);
+      if(Array.isArray(fsUsers)&&fsUsers.length>0){
+        USERS=fsUsers;
+        localStorage.setItem('sgd_users',JSON.stringify(USERS));
+        // Refresh the PIN screen with real users
+        if($('pinScreen')&&$('pinScreen').style.display!=='none'){
+          showUserSel();
+        }
+      }
+    }
+  }catch(e){ console.warn('Could not load users from Firestore',e); }
 }
 
 function showFirstRunSetup(){
-  // Just a reminder — PIN is still required to enter
+  // Notify admin to set up PIN
   setTimeout(()=>{
-    toast('ℹ️ Tip: Change your PIN in 🔐 PIN Management for better security.','warn');
-  },2000);
+    toast('⚠️ Default PIN is 1234 — please change it in 🔐 PIN Management!','warn');
+  },1500);
 }
 
 function showUserSel(){
@@ -2417,17 +2450,12 @@ function unlockAsUser(user){
   $('ni-pin').style.display=user.role==='admin'?'flex':'none';
   // Navigate to dashboard
   nav('dashboard');
-  // If Firestore is already ready, data is available — render immediately.
-  // If not ready yet, wait for it to load then re-render the dashboard.
+  // If Firestore not ready yet, wait for it then refresh with real data
   if(!fsReady){
-    const waitForFS = setInterval(()=>{
-      if(fsReady){
-        clearInterval(waitForFS);
-        nav(curPage);
-      }
-    }, 300);
-    // Give up after 15 seconds
-    setTimeout(()=>clearInterval(waitForFS), 15000);
+    const waitFS=setInterval(()=>{
+      if(fsReady){clearInterval(waitFS);nav(curPage);}
+    },300);
+    setTimeout(()=>clearInterval(waitFS),15000);
   }
 }
 
@@ -2902,13 +2930,11 @@ initPinScreen();
         initPinScreen();
       }
       await lpLoadFromFirestore().catch(e=>console.warn('LP load err',e));
-      // Only refresh the page view if the user is already logged in
-      // (if PIN screen is showing, the page will refresh automatically after login)
       if(currentUser){
         nav(curPage);
-        toast('🔥 Firestore connected — data refreshed!');
+        toast('🔥 Firestore connected — data loaded!');
       } else {
-        toast('🔥 Firestore ready — sign in to load your data!');
+        toast('🔥 Firestore ready — please sign in');
       }
     });
   });
