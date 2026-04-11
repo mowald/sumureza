@@ -451,7 +451,14 @@ input[type=checkbox]{accent-color:var(--gold);}
       <button class="login-btn" onclick="attemptLogin()" id="loginSubmitBtn">Sign In →</button>
     </div>
     <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)">
-      <button type="button" onclick="document.getElementById('loginPanel').style.display='none';document.getElementById('setupPanel').style.display='';document.getElementById('su-name').focus();"
+      <button type="button" onclick="
+        if(USERS.some(function(u){return u.password&&!u.mustChangePassword;})){
+          document.getElementById('loginErr').textContent='Accounts already exist. Contact your admin.';
+          return;
+        }
+        document.getElementById('loginPanel').style.display='none';
+        document.getElementById('setupPanel').style.display='';
+        document.getElementById('su-name').focus();"
         style="background:none;border:none;color:rgba(200,150,42,.7);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;-webkit-tap-highlight-color:transparent;">
         No account yet? Create admin account
       </button>
@@ -495,7 +502,7 @@ input[type=checkbox]{accent-color:var(--gold);}
           onkeydown="if(event.key==='Enter')createFirstAdmin()">
       </div>
       <div class="login-err" id="su-err"></div>
-      <button class="login-btn" onclick="createFirstAdmin()" id="su-btn">
+      <button class="login-btn" id="su-btn" type="button" onclick="doCreateAdmin()">
         Create Account &amp; Sign In →
       </button>
     </div>
@@ -2440,6 +2447,70 @@ async function tryLoadUsersFromFirestore(){
 }
 
 // ── LOGIN FLOW ──────────────────────────────────────────────────
+(){
+  const n=(document.getElementById('su-name')?.value||'').trim();
+  const u=(document.getElementById('su-username')?.value||'').trim().toLowerCase();
+  const p1=(document.getElementById('su-pw1')?.value||'').trim();
+  const p2=(document.getElementById('su-pw2')?.value||'').trim();
+  const err=document.getElementById('su-err');
+  const btn=document.getElementById('su-btn');
+  if(!err||!btn)return;
+  err.textContent='';
+  if(!n){err.textContent='Please enter your full name.';document.getElementById('su-name').focus();return;}
+  if(u.length<2){err.textContent='Username must be at least 2 characters.';document.getElementById('su-username').focus();return;}
+  if(p1.length<6){err.textContent='Password must be at least 6 characters.';document.getElementById('su-pw1').focus();return;}
+  if(p1!==p2){err.textContent='Passwords do not match.';document.getElementById('su-pw2').value='';document.getElementById('su-pw2').focus();return;}
+  btn.disabled=true;
+  btn.textContent='Creating account...';
+  // Hash password then create user
+  hashPassword(p1).then(function(hashed){
+    const pages=['dashboard','quotations','purchase_orders','invoices','delivery','receipts','income','expenses','bank','pnl','balance_sheet','vat','aged_debtors','inventory','clients','suppliers','settings','firestore','pin_management','layers_project'];
+    const adminUser={
+      id:'admin_'+Date.now().toString(36),
+      name:n,username:u,role:'admin',
+      password:hashed,mustChangePassword:false,
+      pages:pages,active:true,
+      createdAt:new Date().toISOString()
+    };
+    USERS=[adminUser];
+    saveUsers();
+    toast('✅ Account created! Welcome, '+n+'!');
+    unlockAsUser(adminUser);
+  }).catch(function(e){
+    err.textContent='Error: '+e.message;
+    btn.disabled=false;
+    btn.textContent='Create Account & Sign In →';
+  });
+}
+
+function doCreateAdmin(){
+  var n=(document.getElementById('su-name')?.value||'').trim();
+  var u=(document.getElementById('su-username')?.value||'').trim().toLowerCase();
+  var p1=(document.getElementById('su-pw1')?.value||'').trim();
+  var p2=(document.getElementById('su-pw2')?.value||'').trim();
+  var err=document.getElementById('su-err');
+  var btn=document.getElementById('su-btn');
+  if(!err||!btn)return;
+  err.textContent='';
+  if(!n){err.textContent='Please enter your full name.';document.getElementById('su-name').focus();return;}
+  if(u.length<2){err.textContent='Username must be at least 2 characters.';document.getElementById('su-username').focus();return;}
+  if(p1.length<6){err.textContent='Password must be at least 6 characters.';document.getElementById('su-pw1').focus();return;}
+  if(p1!==p2){err.textContent='Passwords do not match.';document.getElementById('su-pw2').value='';document.getElementById('su-pw2').focus();return;}
+  btn.disabled=true;
+  btn.textContent='Creating account...';
+  hashPassword(p1).then(function(hashed){
+    var allPages=['dashboard','quotations','purchase_orders','invoices','delivery','receipts','income','expenses','bank','pnl','balance_sheet','vat','aged_debtors','inventory','clients','suppliers','settings','firestore','pin_management','layers_project'];
+    var adminUser={id:'admin_'+Date.now().toString(36),name:n,username:u,role:'admin',password:hashed,mustChangePassword:false,pages:allPages,active:true,createdAt:new Date().toISOString()};
+    USERS=[adminUser];
+    saveUsers();
+    toast('Account created! Welcome, '+n+'!');
+    unlockAsUser(adminUser);
+  }).catch(function(e){
+    err.textContent='Error: '+e.message;
+    btn.disabled=false;
+    btn.textContent='Create Account & Sign In →';
+  });
+}
 function initPinScreen(){
   loadUsers();
   // Strip old PIN-only users (previous auth system)
