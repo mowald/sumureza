@@ -244,21 +244,26 @@ input[type=checkbox]{accent-color:var(--gold);}
 @media print{body *{visibility:hidden;}.docpaper,.docpaper *{visibility:visible;}.docpaper{position:fixed;top:0;left:0;width:100%;padding:28px 36px;}}
 
 /* MOBILE RESPONSIVE */
+/* ── MOBILE ─────────────────────────────────────────── */
 @media(max-width:768px){
-  body{flex-direction:column;overflow:auto;}
-  .sb{width:100%;min-width:unset;height:auto;flex-direction:row;flex-wrap:wrap;padding:6px;overflow-x:auto;overflow-y:hidden;}
-  .brand{padding:8px 12px;border-bottom:none;border-right:1px solid rgba(200,150,42,.12);min-width:130px;}
-  .brand h1{font-size:11px;line-height:1.2;}.brand p{display:none;}.brand-pill{display:none;}
-  .nav-sec{display:none;}
-  .ni{margin:2px;padding:7px 9px;font-size:11px;flex-shrink:0;white-space:nowrap;}
-  .ni-ico{font-size:12px;}
-  .drive-w{display:none;}.sb-foot{display:none;}
-  #lockBtn{display:none!important;}
-  #curUserBar{display:none!important;}
-  .main{flex:1;}
-  .topbar{padding:10px 14px;}
+  body{flex-direction:column;overflow:hidden;height:100vh;}
+
+  /* Hide desktop sidebar entirely on mobile */
+  .sb{display:none;}
+
+  /* Mobile top header bar */
+  .mob-header{display:flex!important;}
+
+  /* Main fills screen, scrolls internally */
+  .main{flex:1;display:flex;flex-direction:column;overflow:hidden;height:100%;}
+  .topbar{padding:10px 14px;flex-shrink:0;}
   .ptitle{font-size:14px;}.psub{display:none;}
-  .content{padding:12px 14px;}
+  .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 14px;padding-bottom:80px;}
+
+  /* Bottom nav bar */
+  .mob-nav{display:flex!important;}
+
+  /* Cards & grids */
   .kgrid.kg4{grid-template-columns:repeat(2,1fr);}
   .kgrid.kg3{grid-template-columns:repeat(2,1fr);}
   .kpi{padding:12px 14px;}.kpi-val{font-size:15px;}
@@ -288,6 +293,62 @@ input[type=checkbox]{accent-color:var(--gold);}
   .kgrid.kg4{grid-template-columns:1fr 1fr;}
   .kpi-val{font-size:13px;}
 }
+
+/* Mobile header — hidden on desktop */
+.mob-header{
+  display:none;
+  background:linear-gradient(90deg,#0d1720,#152030);
+  padding:10px 16px;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+  border-bottom:1px solid rgba(200,150,42,.18);
+}
+.mob-logo{font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:#fff;}
+.mob-logo span{color:var(--gold);font-size:9px;display:block;letter-spacing:1.5px;font-family:'DM Sans',sans-serif;font-weight:600;margin-top:1px;}
+.mob-menu-btn{background:none;border:1px solid rgba(200,150,42,.35);color:var(--gold-light);font-size:13px;padding:6px 12px;border-radius:5px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+
+/* Mobile nav drawer */
+.mob-drawer{
+  display:none;
+  position:fixed;inset:0;z-index:800;
+}
+.mob-drawer.open{display:flex;}
+.mob-drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.55);}
+.mob-drawer-panel{
+  position:relative;z-index:1;
+  width:80%;max-width:300px;
+  background:linear-gradient(175deg,#0d1720,#152030);
+  height:100%;overflow-y:auto;
+  display:flex;flex-direction:column;
+  border-right:1px solid rgba(200,150,42,.18);
+}
+.mob-drawer-head{padding:20px 16px 14px;border-bottom:1px solid rgba(200,150,42,.12);}
+.mob-drawer-head h2{font-family:'Playfair Display',serif;font-size:15px;font-weight:900;color:#fff;}
+.mob-drawer-head p{font-size:9.5px;color:rgba(240,201,106,.5);margin-top:2px;}
+.mob-close{position:absolute;top:14px;right:14px;background:none;border:none;color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;line-height:1;}
+.mob-drawer .nav-sec{padding:13px 14px 3px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,150,42,.4);font-weight:700;}
+.mob-drawer .ni{display:flex;align-items:center;gap:9px;margin:1px 8px;padding:9px 11px;border-radius:6px;cursor:pointer;color:rgba(255,255,255,.55);font-size:13px;font-weight:500;}
+.mob-drawer .ni:hover,.mob-drawer .ni.active{background:rgba(200,150,42,.14);color:var(--gold-light);}
+.mob-drawer .ni-ico{font-size:15px;width:18px;text-align:center;}
+
+/* Mobile bottom nav */
+.mob-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  background:#0d1720;
+  border-top:1px solid rgba(200,150,42,.2);
+  z-index:200;
+  justify-content:space-around;
+  padding:6px 0 env(safe-area-inset-bottom,6px);
+}
+.mob-nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:4px 8px;cursor:pointer;color:rgba(255,255,255,.38);
+  font-size:9px;font-weight:600;letter-spacing:.3px;min-width:52px;
+}
+.mob-nav-item.active{color:var(--gold);}
+.mob-nav-item .mni-ico{font-size:20px;}
 
 /* PIN AUTH */
 .pin-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0d1720 0%,#152030 60%,#1a2a40 100%);z-index:9999;display:flex;align-items:center;justify-content:center;}
@@ -349,7 +410,57 @@ input[type=checkbox]{accent-color:var(--gold);}
   </div>
 </div>
 
-<!-- SIDEBAR -->
+<!-- MOBILE HEADER (hidden on desktop) -->
+<div class="mob-header" id="mobHeader">
+  <div class="mob-logo">SUMUREZA <span>GENERAL SUPPLIES</span></div>
+  <button class="mob-menu-btn" onclick="openMobDrawer()">☰ Menu</button>
+</div>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-drawer-bg" onclick="closeMobDrawer()"></div>
+  <div class="mob-drawer-panel">
+    <button class="mob-close" onclick="closeMobDrawer()">×</button>
+    <div class="mob-drawer-head">
+      <h2>SUMUREZA</h2>
+      <p>GENERAL SUPPLIES</p>
+    </div>
+    <div class="nav-sec">Overview</div>
+    <div class="ni" onclick="mobNav('dashboard')"><span class="ni-ico">📊</span>Dashboard</div>
+    <div class="nav-sec">Projects</div>
+    <div class="ni" onclick="mobNav('layers_project')"><span class="ni-ico">🐔</span>Layers Project</div>
+    <div class="nav-sec">Documents</div>
+    <div class="ni" onclick="mobNav('quotations')"><span class="ni-ico">📋</span>Quotations</div>
+    <div class="ni" onclick="mobNav('purchase_orders')"><span class="ni-ico">🛒</span>Purchase Orders</div>
+    <div class="ni" onclick="mobNav('invoices')"><span class="ni-ico">🧾</span>Invoices</div>
+    <div class="ni" onclick="mobNav('delivery')"><span class="ni-ico">🚚</span>Delivery Notes</div>
+    <div class="ni" onclick="mobNav('receipts')"><span class="ni-ico">✅</span>Receipts</div>
+    <div class="nav-sec">Finance</div>
+    <div class="ni" onclick="mobNav('income')"><span class="ni-ico">💰</span>Income</div>
+    <div class="ni" onclick="mobNav('expenses')"><span class="ni-ico">💸</span>Expenses</div>
+    <div class="nav-sec">Reports</div>
+    <div class="ni" onclick="mobNav('pnl')"><span class="ni-ico">📈</span>Profit & Loss</div>
+    <div class="ni" onclick="mobNav('balance_sheet')"><span class="ni-ico">⚖️</span>Balance Sheet</div>
+    <div class="nav-sec">Operations</div>
+    <div class="ni" onclick="mobNav('inventory')"><span class="ni-ico">📦</span>Inventory</div>
+    <div class="ni" onclick="mobNav('clients')"><span class="ni-ico">👥</span>Clients</div>
+    <div class="ni" onclick="mobNav('suppliers')"><span class="ni-ico">🏭</span>Suppliers</div>
+    <div class="nav-sec">Settings</div>
+    <div class="ni" onclick="mobNav('settings')"><span class="ni-ico">⚙️</span>Company Settings</div>
+    <div class="ni" onclick="mobNav('firestore')"><span class="ni-ico">🔥</span>Firestore DB</div>
+  </div>
+</div>
+
+<!-- MOBILE BOTTOM NAV (hidden on desktop) -->
+<div class="mob-nav" id="mobNav">
+  <div class="mob-nav-item active" id="mni-dashboard" onclick="mobNav('dashboard')"><span class="mni-ico">📊</span>Home</div>
+  <div class="mob-nav-item" id="mni-invoices" onclick="mobNav('invoices')"><span class="mni-ico">🧾</span>Invoices</div>
+  <div class="mob-nav-item" id="mni-layers_project" onclick="mobNav('layers_project')"><span class="mni-ico">🐔</span>Layers</div>
+  <div class="mob-nav-item" id="mni-expenses" onclick="mobNav('expenses')"><span class="mni-ico">💸</span>Expenses</div>
+  <div class="mob-nav-item" id="mni-menu" onclick="openMobDrawer()"><span class="mni-ico">☰</span>More</div>
+</div>
+
+<!-- SIDEBAR (desktop only) -->
 <aside class="sb">
   <div class="brand">
     <div class="brand-pill">Business Suite</div>
@@ -378,6 +489,8 @@ input[type=checkbox]{accent-color:var(--gold);}
   <div class="ni" onclick="nav('inventory')"><span class="ni-ico">📦</span>Inventory</div>
   <div class="ni" onclick="nav('clients')"><span class="ni-ico">👥</span>Clients</div>
   <div class="ni" onclick="nav('suppliers')"><span class="ni-ico">🏭</span>Suppliers</div>
+  <div class="nav-sec">Projects</div>
+  <div class="ni" onclick="nav('layers_project')"><span class="ni-ico">🐔</span>Layers Project</div>
   <div class="nav-sec">Settings</div>
   <div class="ni" onclick="nav('settings')"><span class="ni-ico">⚙️</span>Company Settings</div>
   <div class="ni" onclick="nav('firestore')"><span class="ni-ico">🔥</span>Firestore DB</div>
@@ -473,6 +586,19 @@ let docItems=[];
 // UTILITIES
 // ═══════════════════════════════════════════════════════════
 const $=id=>document.getElementById(id);
+
+// ── MOBILE NAV ───────────────────────────────────────────────
+function openMobDrawer(){const d=$('mobDrawer');if(d)d.classList.add('open');}
+function closeMobDrawer(){const d=$('mobDrawer');if(d)d.classList.remove('open');}
+function mobNav(page){
+  closeMobDrawer();
+  nav(page);
+  // Update bottom nav active state
+  document.querySelectorAll('.mob-nav-item').forEach(el=>el.classList.remove('active'));
+  const active=$('mni-'+page);if(active)active.classList.add('active');
+  // Update drawer nav active state
+  document.querySelectorAll('.mob-drawer .ni').forEach(el=>el.classList.remove('active'));
+}
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const gv=id=>{const e=$(id);return e?e.value:'';}
 const today=()=>new Date().toISOString().split('T')[0];
@@ -547,45 +673,32 @@ async function fsInit(){
 
 async function fsSave(key,data){
   if(!db){console.warn('Firestore not ready');return;}
-  // Also save to localStorage as offline cache
+  // Save to localStorage as offline cache
   try{localStorage.setItem('sgd_l_'+key,JSON.stringify(data));}catch(e){}
-  if(key==='settings'){
-    try{await db.collection('settings').doc('main').set(data);}catch(e){console.warn('FS write error',e);}
-    return;
-  }
-  // For arrays: write each record as a document
-  if(!Array.isArray(data))return;
-  const col=db.collection(key);
+  // Store ENTIRE collection as one Firestore document.
+  // This means adds, edits AND deletes all sync correctly across devices.
+  // Stored under 'store' collection, one doc per key.
   try{
-    const batch=db.batch();
-    data.forEach(r=>{if(r.id)batch.set(col.doc(r.id),r);});
-    await batch.commit();
-  }catch(e){console.warn('FS batch write error',e);}
+    await db.collection('store').doc(key).set({
+      data: JSON.stringify(data),
+      updated: Date.now()
+    });
+  }catch(e){console.warn('FS write error ['+key+']',e);}
 }
 
 async function fsLoad(key){
   if(!db)return null;
   try{
-    if(key==='settings'){
-      const d=await db.collection('settings').doc('main').get();
-      return d.exists?d.data():null;
-    }
-    const snap=await db.collection(key).get();
-    if(snap.empty)return null;
-    return snap.docs.map(d=>d.data());
-  }catch(e){console.warn('FS read error',e);return null;}
+    const snap=await db.collection('store').doc(key).get();
+    if(!snap.exists)return null;
+    const raw=snap.data();
+    if(!raw||!raw.data)return null;
+    return JSON.parse(raw.data);
+  }catch(e){console.warn('FS read error ['+key+']',e);return null;}
 }
 
 async function fsDelete(key,id){
-  if(!db)return;
-  try{
-    await db.collection(key).doc(id).delete();
-    // Also remove from localStorage cache
-    try{
-      const local=JSON.parse(localStorage.getItem('sgd_l_'+key)||'[]');
-      localStorage.setItem('sgd_l_'+key,JSON.stringify(local.filter(r=>r.id!==id)));
-    }catch(e){}
-  }catch(e){console.warn('FS delete error',e);}
+  // No-op: handled automatically by fsSave overwriting the whole collection doc
 }
 
 async function loadAll(){
@@ -654,6 +767,7 @@ const PMETA={
   settings:{t:'Company Settings',s:'Business information and preferences'},
   firestore:{t:'Firestore Database',s:'Cloud database status, backup & restore'},
   pin_management:{t:'PIN Management',s:'Manage staff PINs and access levels'},
+  layers_project:{t:'🐔 Layers Poultry Project',s:'Setup tracker — checklist, expenses & daily records'},
 };
 
 function nav(page){
@@ -672,6 +786,7 @@ function nav(page){
     inventory:renderInventory,clients:()=>renderList('clients'),
     suppliers:()=>renderList('suppliers'),
     settings:renderSettings,firestore:renderFirestore,pin_management:renderPinMgmt,
+    layers_project:renderLayersProject,
   };
   $('content').innerHTML=(renders[page]||renderDash)();
   setTopActions(page);
@@ -1036,9 +1151,9 @@ async function saveSimple(key,id){
 async function del(key,id){
   if(!confirm('Delete this record? This cannot be undone.'))return;
   DB[key]=DB[key].filter(r=>r.id!==id);
-  // Delete from Firestore directly + update cache
-  await fsDelete(key,id);
-  try{localStorage.setItem('sgd_l_'+key,JSON.stringify(DB[key]));}catch(e){}
+  // Save the full updated array to Firestore — this overwrites the collection
+  // doc so the deleted record is gone on ALL devices, not just this one.
+  await save(key);
   toast('Record deleted');nav(key);
 }
 
@@ -2011,14 +2126,19 @@ function renderFirestore(){
     </div>
   </div>
 
+  <div class="alert-box alert-ok" style="margin-bottom:16px">
+    ✅ <strong>Sync fixed:</strong> All adds, edits and deletes now sync across every device via Firestore automatically.
+  </div>
+
   <div class="card" style="margin-bottom:18px">
-    <div class="ch"><h3>🔥 Firestore Database</h3></div>
+    <div class="ch"><h3>🔥 Firestore Sync</h3></div>
     <div class="cb">
-      <p style="font-size:13px;color:var(--ink-soft);margin-bottom:16px">Your data is stored in Google Firestore cloud database. It syncs automatically across all your devices in real time.</p>
+      <p style="font-size:13px;color:var(--ink-soft);margin-bottom:16px">Your data syncs automatically to Firestore every time you add, edit or delete a record. Open the app on any device and it will load the latest data.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn bg" onclick="loadAll().then(()=>{nav('dashboard');})">⟳ Reload All Data from Firestore</button>
-        <button class="btn bout" onclick="nav('dashboard')">← Back to Dashboard</button>
+        <button class="btn bg" onclick="pushAllToFirestore()">☁️ Push All Local Data to Firestore</button>
+        <button class="btn bout" onclick="loadAll().then(()=>{nav('firestore');toast('✅ Data reloaded from Firestore!')})">⟳ Pull Latest from Firestore</button>
       </div>
+      <p style="font-size:11.5px;color:var(--ink-muted);margin-top:10px">Use <strong>Push</strong> once from your main phone to upload all existing data. Other devices will then load it automatically on startup.</p>
     </div>
   </div>
 
@@ -2044,6 +2164,20 @@ function renderFirestore(){
       </div>
     </div>
   </div>`;
+}
+
+async function pushAllToFirestore(){
+  if(!fsReady){toast('Firestore not connected yet — wait a moment and try again','warn');return;}
+  const keys=['clients','suppliers','inventory','quotations','purchase_orders','invoices','delivery','receipts','income','expenses','bank_transactions','stock_movements','settings'];
+  showSync('Uploading all data to Firestore...');
+  let count=0;
+  for(const k of keys){
+    const data=k==='settings'?DB.settings:DB[k];
+    await fsSave(k,data);
+    count++;
+  }
+  hideSync();
+  toast('✅ All '+count+' collections pushed to Firestore! Other devices will now load this data.');
 }
 
 async function migrateFromJson(){
@@ -2109,8 +2243,8 @@ async function restoreFromFile(input){
 // ═══════════════════════════════════════════════════════════
 // PIN AUTHENTICATION SYSTEM
 // ═══════════════════════════════════════════════════════════
-const PIN_PAGES_ALL=['dashboard','quotations','purchase_orders','invoices','delivery','receipts','income','expenses','bank','pnl','balance_sheet','vat','aged_debtors','inventory','clients','suppliers','settings','firestore','pin_management'];
-const PIN_PAGES_RESTRICTED=['dashboard','quotations','invoices','delivery','receipts','income','inventory','clients'];
+const PIN_PAGES_ALL=['dashboard','quotations','purchase_orders','invoices','delivery','receipts','income','expenses','bank','pnl','balance_sheet','vat','aged_debtors','inventory','clients','suppliers','settings','firestore','pin_management','layers_project'];
+const PIN_PAGES_RESTRICTED=['dashboard','quotations','invoices','delivery','receipts','income','inventory','clients','layers_project'];
 
 // Default users — stored in localStorage under 'sgd_users'
 let USERS=[];
@@ -2325,11 +2459,290 @@ function renderPinMgmt(){
   </div>`;
 }
 
+// ═══════════════════════════════════════════════════════════
+// LAYERS POULTRY PROJECT
+// ═══════════════════════════════════════════════════════════
+const LP={checks:{},expenses:[],logs:[],budget:0,notes:'',_expId:1,_logId:1};
+(function lpLoad(){try{const d=JSON.parse(localStorage.getItem('sgd_layers')||'null');if(d)Object.assign(LP,d);}catch(e){}})();
+
+function lpSave(){
+  try{localStorage.setItem('sgd_layers',JSON.stringify(LP));}catch(e){}
+  if(db&&fsReady){
+    try{db.collection('store').doc('layers_main').set({data:JSON.stringify({checks:LP.checks,budget:LP.budget,notes:LP.notes,_expId:LP._expId,_logId:LP._logId}),updated:Date.now()});}catch(e){}
+    try{db.collection('store').doc('layers_expenses').set({data:JSON.stringify(LP.expenses),updated:Date.now()});}catch(e){}
+    try{db.collection('store').doc('layers_logs').set({data:JSON.stringify(LP.logs),updated:Date.now()});}catch(e){}
+  }
+}
+
+async function lpLoadFromFirestore(){
+  if(!db||!fsReady)return;
+  try{
+    const [m,e,l]=await Promise.all([
+      db.collection('store').doc('layers_main').get(),
+      db.collection('store').doc('layers_expenses').get(),
+      db.collection('store').doc('layers_logs').get(),
+    ]);
+    if(m.exists&&m.data().data){const d=JSON.parse(m.data().data);Object.assign(LP,d);}
+    if(e.exists&&e.data().data){LP.expenses=JSON.parse(e.data().data);}
+    if(l.exists&&l.data().data){LP.logs=JSON.parse(l.data().data);}
+    localStorage.setItem('sgd_layers',JSON.stringify(LP));
+  }catch(err){console.warn('LP Firestore load error',err);}
+}
+
+const LP_PHASES=[
+  {id:'planning',icon:'📐',name:'Phase 1 — Planning & site',items:[
+    {id:1,text:'Choose and confirm land / site location',note:'Check drainage, access road, distance from neighbours',p:'must'},
+    {id:2,text:'Decide flock size (number of birds)',note:'Standard: 4–6 birds per m² of floor space',p:'must'},
+    {id:3,text:'Set total project budget',note:'Include 15–20% contingency',p:'must'},
+    {id:4,text:'Get at least 3 contractor quotes',note:'',p:'need'},
+    {id:5,text:'Check local council / LCI permits',note:'Commercial poultry may need approval',p:'need'},
+    {id:6,text:'Confirm reliable water source on site',note:'Layers need constant clean water',p:'must'},
+  ]},
+  {id:'construction',icon:'🏗️',name:'Phase 2 — House construction',items:[
+    {id:7,text:'Lay concrete foundation and floor',note:'Slope floor slightly (2°) toward drain for easy washing',p:'must'},
+    {id:8,text:'Build walls — brick, block or timber frame',note:'Wall height: 2.0–2.4 m minimum',p:'must'},
+    {id:9,text:'Install roof — iron sheets (insulated preferred)',note:'Ventilation gap at ridge is critical for heat',p:'must'},
+    {id:10,text:'Install side ventilation openings / curtains',note:'Open sides with wire mesh + drop curtains work well',p:'must'},
+    {id:11,text:'Install solid door with wire screen inner door',note:'Prevents predators and wild birds entering',p:'must'},
+    {id:12,text:'Install gutters and drainage channel',note:'Keep water away from house foundation',p:'need'},
+    {id:13,text:'Install electricity / wiring',note:'For lighting (14–16 hrs/day for layers) and fans',p:'must'},
+    {id:14,text:'Paint / lime-wash interior walls',note:'Light colour helps visibility and hygiene',p:'nice'},
+  ]},
+  {id:'equipment',icon:'⚙️',name:'Phase 3 — Standard equipment',items:[
+    {id:15,text:'Install laying nests / nest boxes',note:'1 nest box per 4–5 hens; place in darkened area',p:'must'},
+    {id:16,text:'Install perches / roosting bars',note:'10 cm perch space per bird; 30–40 cm above floor',p:'must'},
+    {id:17,text:'Buy and hang tube feeders or trough feeders',note:'5 cm feeder space per bird minimum',p:'must'},
+    {id:18,text:'Buy and install nipple drinkers or bell drinkers',note:'Nipple drinkers reduce disease significantly',p:'must'},
+    {id:19,text:'Set up brooder area (for pullets arriving young)',note:'Gas or electric brooder; test 48 hrs before birds arrive',p:'must'},
+    {id:20,text:'Buy thermometers (min/max)',note:'Target temp: 18–24°C for laying hens',p:'need'},
+    {id:21,text:'Prepare deep litter bedding',note:'Rice husks or wood shavings, 8–10 cm deep',p:'must'},
+    {id:22,text:'Buy egg trays and egg collection baskets',note:'',p:'must'},
+    {id:23,text:'Buy weighing scale',note:'Monitor feed and egg weights weekly',p:'need'},
+    {id:24,text:'Buy sprayer for disinfection',note:'',p:'need'},
+    {id:25,text:'Get rodent-proof feed storage bins',note:'Pests destroy feed quickly',p:'need'},
+    {id:26,text:'Install lighting timer',note:'Layers need 14–16 hrs light per day for max production',p:'must'},
+  ]},
+  {id:'biosecurity',icon:'🛡️',name:'Phase 4 — Biosecurity & health',items:[
+    {id:27,text:'Fumigate / disinfect house before birds arrive',note:'Formalin fumigation or Virkon-S spray; seal 24 hrs then ventilate',p:'must'},
+    {id:28,text:'Install footbath at house entrance',note:'Use Virkon or lime solution; change weekly',p:'must'},
+    {id:29,text:'Erect perimeter fence around house',note:'Keeps out dogs, wild animals, casual visitors',p:'must'},
+    {id:30,text:'Source birds from certified pullet supplier',note:'Ugachick, Kenchic, or NARO-certified hatchery',p:'must'},
+    {id:31,text:'Plan vaccination schedule with a vet',note:"Newcastle, Gumboro, Infectious Bronchitis, Marek's",p:'must'},
+    {id:32,text:'Stock first-aid medicine kit',note:'Antibiotics, vitamins, electrolytes, dewormer',p:'need'},
+    {id:33,text:'Register with a local veterinary officer',note:'Required for commercial flocks in Uganda',p:'need'},
+    {id:34,text:'Put up "No entry" sign — biosecurity zone',note:'',p:'nice'},
+  ]},
+  {id:'operations',icon:'🚀',name:'Phase 5 — Stocking & operations',items:[
+    {id:35,text:'Order and receive pullets (point-of-lay, 18–19 weeks)',note:'Confirm delivery date and transport arrangement',p:'must'},
+    {id:36,text:'Source layers feed supplier — layers mash',note:'Compare UGX price per 50 kg bag from 3 suppliers',p:'must'},
+    {id:37,text:'Set up daily record-keeping (this app)',note:'Log eggs, mortality, feed, water, medications daily',p:'must'},
+    {id:38,text:'Create weekly egg collection and sales schedule',note:'',p:'need'},
+    {id:39,text:'Plan egg market / buyers',note:'Hotels, supermarkets, market traders, direct customers',p:'must'},
+    {id:40,text:'Hire farm attendant',note:'Brief them on feeding, collection and biosecurity routines',p:'need'},
+  ]},
+];
+
+const LP_CAT_COLORS={construction:'#1a3a6b',birds:'#1a6b45',feed:'#3b6d11',equipment:'#7a5800',medicine:'#8b2020',labour:'#444',utilities:'#4a1a6b',other:'#6b2a4a'};
+const LP_CAT_BG={construction:'var(--blue-bg)',birds:'var(--green-bg)',feed:'#eaf3de',equipment:'var(--orange-bg)',medicine:'var(--red-bg)',labour:'#f0f0f0',utilities:'var(--purple-bg)',other:'#fbeaf0'};
+
+function renderLayersProject(){
+  const allItems=LP_PHASES.flatMap(p=>p.items);
+  const doneCount=allItems.filter(i=>LP.checks[i.id]).length;
+  const pct=allItems.length?Math.round(doneCount/allItems.length*100):0;
+  const totalSpent=LP.expenses.reduce((s,e)=>s+(e.amount||0),0);
+  const budgetLeft=LP.budget>0?LP.budget-totalSpent:null;
+
+  const metricsHtml=`<div class="kgrid kg4" style="margin-bottom:20px">
+    <div class="kpi ko"><div class="kpi-lbl">Total Spent</div><div class="kpi-val">${fmt(totalSpent)}</div><div class="kpi-sub">project expenses</div></div>
+    <div class="kpi ${budgetLeft!==null&&budgetLeft<0?'kr':'kg'}"><div class="kpi-lbl">Budget Remaining</div><div class="kpi-val">${budgetLeft!==null?fmt(budgetLeft):'—'}</div><div class="kpi-sub">${budgetLeft===null?'set budget below':budgetLeft<0?'over budget!':'remaining'}</div></div>
+    <div class="kpi kb"><div class="kpi-lbl">Setup Progress</div><div class="kpi-val">${pct}%</div><div class="kpi-sub">${doneCount} of ${allItems.length} tasks done</div></div>
+    <div class="kpi kt"><div class="kpi-lbl">Daily Records</div><div class="kpi-val">${LP.logs.length}</div><div class="kpi-sub">log entries recorded</div></div>
+  </div>`;
+
+  const tabsHtml=`<div class="tab-bar">
+    <div class="tab active" onclick="lpTab('checklist',this)">✅ House Checklist</div>
+    <div class="tab" onclick="lpTab('expenses',this)">💸 Expenses</div>
+    <div class="tab" onclick="lpTab('daily',this)">📋 Daily Log</div>
+    <div class="tab" onclick="lpTab('notes',this)">📝 Notes</div>
+  </div>`;
+
+  const checklistHtml=LP_PHASES.map(phase=>{
+    const total=phase.items.length;
+    const done=phase.items.filter(i=>LP.checks[i.id]).length;
+    const pp=total?Math.round(done/total*100):0;
+    const isOpen=phase.items.some(i=>!LP.checks[i.id]);
+    return`<div class="card" style="margin-bottom:14px">
+      <div class="ch" style="cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'">
+        <h3>${phase.icon} ${esc(phase.name)} <span style="font-size:11px;font-weight:400;color:var(--ink-muted);font-family:'DM Sans',sans-serif">${done}/${total}</span></h3>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:80px;height:5px;background:var(--border);border-radius:99px;overflow:hidden"><div style="width:${pp}%;height:100%;background:var(--green);border-radius:99px"></div></div>
+          <span style="font-size:12px;color:var(--ink-muted)">${pp}%</span>
+        </div>
+      </div>
+      <div class="cb" style="display:${isOpen?'':'none'};padding:10px 16px">
+        ${phase.items.map(item=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 4px;border-bottom:1px solid var(--border-light)">
+          <input type="checkbox" ${LP.checks[item.id]?'checked':''} onchange="lpCheck(${item.id},this.checked)" style="margin-top:3px;flex-shrink:0">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;color:var(--ink);${LP.checks[item.id]?'text-decoration:line-through;color:var(--ink-muted)':''}">${esc(item.text)}</div>
+            ${item.note?`<div style="font-size:11px;color:var(--ink-muted);margin-top:2px">${esc(item.note)}</div>`:''}
+          </div>
+          <span class="chip ${item.p==='must'?'cr':item.p==='need'?'co':'cgr'}" style="flex-shrink:0;font-size:9px">${item.p==='must'?'must-have':item.p==='need'?'needed':'nice'}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  const expRows=LP.expenses.length?[...LP.expenses].sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`<tr>
+    <td>${esc(e.date)}</td><td>${esc(e.desc)}</td>
+    <td><span class="chip" style="background:${LP_CAT_BG[e.cat]||'#f0f0f0'};color:${LP_CAT_COLORS[e.cat]||'#444'}">${esc(e.cat.charAt(0).toUpperCase()+e.cat.slice(1))}</span></td>
+    <td class="mono nr">${fmt(e.amount)}</td>
+    <td class="nc"><button class="btn bred bxs" onclick="lpDelExp(${e.id})">Del</button></td>
+  </tr>`).join(''):`<tr class="erow"><td colspan="5">No expenses yet — add your first entry above</td></tr>`;
+
+  const cats=['construction','birds','feed','equipment','medicine','labour','utilities','other'];
+  const catTotals={};cats.forEach(c=>catTotals[c]=LP.expenses.filter(e=>e.cat===c).reduce((s,e)=>s+(e.amount||0),0));
+  const grandTotal=Object.values(catTotals).reduce((s,v)=>s+v,0);
+  const barsHtml=grandTotal>0?cats.filter(c=>catTotals[c]>0).map(c=>{
+    const pp=Math.round(catTotals[c]/grandTotal*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;font-size:12px">
+      <div style="width:90px;color:var(--ink-soft)">${c.charAt(0).toUpperCase()+c.slice(1)}</div>
+      <div style="flex:1;height:7px;background:var(--border);border-radius:99px;overflow:hidden"><div style="width:${pp}%;height:100%;background:${LP_CAT_COLORS[c]};border-radius:99px"></div></div>
+      <div style="width:130px;text-align:right;color:var(--ink-muted)">${fmt(catTotals[c])} (${pp}%)</div>
+    </div>`;
+  }).join(''):'';
+
+  const totalSpentFmt=fmt(LP.expenses.reduce((s,e)=>s+(e.amount||0),0));
+  const expHtml=`
+    <div class="card" style="margin-bottom:14px">
+      <div class="ch"><h3>💰 Budget</h3></div>
+      <div class="cb">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:${grandTotal>0?'16px':'0'}">
+          <label class="fl" style="white-space:nowrap">Total project budget (UGX)</label>
+          <input class="fi" type="number" id="lp-budget" value="${LP.budget||''}" placeholder="e.g. 10000000" style="max-width:220px" oninput="LP.budget=parseFloat(this.value)||0;lpSave()">
+        </div>
+        ${grandTotal>0?`<div style="padding-top:14px;border-top:1px solid var(--border)"><div class="fl" style="margin-bottom:10px">Spending by category</div>${barsHtml}</div>`:''}
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><h3>💸 Log Expense</h3></div>
+      <div class="cb">
+        <div class="fg3" style="margin-bottom:12px">
+          <div class="fg"><label class="fl">Description</label><input class="fi" id="lp-desc" placeholder="What was purchased?"></div>
+          <div class="fg"><label class="fl">Category</label><select class="fs" id="lp-cat">
+            <option value="construction">Construction</option><option value="birds">Birds / Chicks</option>
+            <option value="feed">Feed</option><option value="equipment">Equipment</option>
+            <option value="medicine">Medicine / Vaccines</option><option value="labour">Labour</option>
+            <option value="utilities">Utilities</option><option value="other">Other</option>
+          </select></div>
+          <div class="fg"><label class="fl">Amount (UGX)</label><input class="fi" type="number" id="lp-amt" placeholder="0"></div>
+        </div>
+        <div class="fg2" style="margin-bottom:14px">
+          <div class="fg"><label class="fl">Date</label><input class="fi" type="date" id="lp-date" value="${today()}"></div>
+          <div class="fg" style="justify-content:flex-end;padding-top:16px"><button class="btn bg" onclick="lpAddExp()">+ Add Expense</button></div>
+        </div>
+      </div>
+      <table class="tbl"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th class="nr">Amount</th><th class="nc">Del</th></tr></thead>
+      <tbody>${expRows}</tbody></table>
+      ${LP.expenses.length?`<div style="display:flex;justify-content:flex-end;padding:12px 16px;border-top:1px solid var(--border);background:#f8f7f5"><strong>Total: ${totalSpentFmt}</strong></div>`:''}
+    </div>`;
+
+  const logRows=LP.logs.length?[...LP.logs].sort((a,b)=>b.date.localeCompare(a.date)).map(l=>`<tr>
+    <td>${esc(l.date)}</td>
+    <td style="font-weight:600;color:var(--green)">${l.eggs}</td>
+    <td style="color:${l.mort>0?'var(--red)':'var(--ink-muted)'}">${l.mort}</td>
+    <td>${l.feed}</td><td>${l.water}</td>
+    <td style="font-size:12px;color:var(--ink-muted)">${esc(l.note||'—')}</td>
+    <td class="nc"><button class="btn bred bxs" onclick="lpDelLog(${l.id})">Del</button></td>
+  </tr>`).join(''):`<tr class="erow"><td colspan="7">No records yet — start logging daily</td></tr>`;
+
+  const dailyHtml=`
+    <div class="card" style="margin-bottom:14px">
+      <div class="ch"><h3>📋 Add Daily Record</h3></div>
+      <div class="cb">
+        <div class="fg3" style="margin-bottom:12px">
+          <div class="fg"><label class="fl">Date</label><input class="fi" type="date" id="ld-date" value="${today()}"></div>
+          <div class="fg"><label class="fl">Eggs collected</label><input class="fi" type="number" id="ld-eggs" placeholder="0"></div>
+          <div class="fg"><label class="fl">Mortality</label><input class="fi" type="number" id="ld-mort" placeholder="0"></div>
+        </div>
+        <div class="fg3" style="margin-bottom:14px">
+          <div class="fg"><label class="fl">Feed consumed (kg)</label><input class="fi" type="number" id="ld-feed" placeholder="0"></div>
+          <div class="fg"><label class="fl">Water (litres)</label><input class="fi" type="number" id="ld-water" placeholder="0"></div>
+          <div class="fg"><label class="fl">Notes / observations</label><input class="fi" id="ld-note" placeholder="Medications, issues..."></div>
+        </div>
+        <button class="btn bgreen" onclick="lpAddLog()">+ Save Record</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><h3>📊 Daily Records (${LP.logs.length})</h3></div>
+      <table class="tbl"><thead><tr><th>Date</th><th>Eggs</th><th>Mortality</th><th>Feed (kg)</th><th>Water (L)</th><th>Notes</th><th class="nc">Del</th></tr></thead>
+      <tbody>${logRows}</tbody></table>
+    </div>`;
+
+  const notesHtml=`<div class="card">
+    <div class="ch"><h3>📝 Project Notes</h3></div>
+    <div class="cb">
+      <p style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">Supplier contacts, house dimensions, vet details, vaccination schedule, decisions.</p>
+      <textarea class="ft" id="lp-notes" rows="10" placeholder="e.g.&#10;House size: 10m x 6m — capacity 500 layers&#10;Contractor: John Mukasa — 0772-xxxxxx&#10;Chick supplier: Ugachick — 0414-xxxxxx&#10;Vet: Dr. Namukasa — 0772-xxxxxx">${esc(LP.notes)}</textarea>
+      <div class="actions-row"><button class="btn bg" onclick="lpSaveNotes()">💾 Save Notes</button></div>
+    </div>
+  </div>`;
+
+  return`<div>
+    ${metricsHtml}
+    ${tabsHtml}
+    <div id="lp-checklist">${checklistHtml}</div>
+    <div id="lp-expenses" style="display:none">${expHtml}</div>
+    <div id="lp-daily" style="display:none">${dailyHtml}</div>
+    <div id="lp-notes" style="display:none">${notesHtml}</div>
+  </div>`;
+}
+
+function lpTab(name,el){
+  document.querySelectorAll('#content .tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  ['checklist','expenses','daily','notes'].forEach(n=>{const e2=document.getElementById('lp-'+n);if(e2)e2.style.display=n===name?'':'none';});
+}
+function lpCheck(id,val){LP.checks[id]=val;lpSave();nav('layers_project');}
+function lpAddExp(){
+  const desc=(document.getElementById('lp-desc')?.value||'').trim();
+  const cat=document.getElementById('lp-cat')?.value||'other';
+  const amt=parseFloat(document.getElementById('lp-amt')?.value||'0');
+  const date=document.getElementById('lp-date')?.value||today();
+  if(!desc||!amt||amt<=0){toast('Please enter description and amount','warn');return;}
+  LP.expenses.push({id:LP._expId++,desc,cat,amount:amt,date});
+  lpSave();nav('layers_project');
+  setTimeout(()=>lpTab('expenses',document.querySelector('#content .tab-bar .tab:nth-child(2)')),10);
+}
+function lpDelExp(id){
+  if(!confirm('Delete this expense?'))return;
+  LP.expenses=LP.expenses.filter(e=>e.id!==id);
+  lpSave();nav('layers_project');
+  setTimeout(()=>lpTab('expenses',document.querySelector('#content .tab-bar .tab:nth-child(2)')),10);
+}
+function lpAddLog(){
+  const date=document.getElementById('ld-date')?.value||today();
+  const eggs=parseInt(document.getElementById('ld-eggs')?.value||'0')||0;
+  const mort=parseInt(document.getElementById('ld-mort')?.value||'0')||0;
+  const feed=parseFloat(document.getElementById('ld-feed')?.value||'0')||0;
+  const water=parseFloat(document.getElementById('ld-water')?.value||'0')||0;
+  const note=(document.getElementById('ld-note')?.value||'').trim();
+  LP.logs.push({id:LP._logId++,date,eggs,mort,feed,water,note});
+  lpSave();toast('✅ Daily record saved!');nav('layers_project');
+  setTimeout(()=>lpTab('daily',document.querySelector('#content .tab-bar .tab:nth-child(3)')),10);
+}
+function lpDelLog(id){
+  if(!confirm('Delete this record?'))return;
+  LP.logs=LP.logs.filter(l=>l.id!==id);
+  lpSave();nav('layers_project');
+  setTimeout(()=>lpTab('daily',document.querySelector('#content .tab-bar .tab:nth-child(3)')),10);
+}
+function lpSaveNotes(){LP.notes=document.getElementById('lp-notes')?.value||'';lpSave();toast('✅ Notes saved!');}
+
 const ROLE_PAGES={
   admin:PIN_PAGES_ALL,
-  cashier:['dashboard','invoices','receipts','income','expenses','inventory','clients'],
-  sales:['dashboard','quotations','invoices','delivery','receipts','inventory','clients'],
-  viewer:['dashboard','quotations','invoices','receipts','inventory','clients'],
+  cashier:['dashboard','invoices','receipts','income','expenses','inventory','clients','layers_project'],
+  sales:['dashboard','quotations','invoices','delivery','receipts','inventory','clients','layers_project'],
+  viewer:['dashboard','quotations','invoices','receipts','inventory','clients','layers_project'],
 };
 
 function openAddUser(){
@@ -2453,6 +2866,7 @@ initPinScreen();
         loadUsers();
         initPinScreen();
       }
+      await lpLoadFromFirestore().catch(e=>console.warn('LP load err',e));
       nav(curPage);
       toast('🔥 Firestore connected — data loaded!');
     });
